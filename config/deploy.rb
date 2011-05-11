@@ -3,7 +3,7 @@ require 'capistrano/ext/multistage'
 
 server "50.57.64.194", :app, :web, :db, :primary => true
 
-set :user, 'root'
+set :user, 'demo'
 set :keep_releases, 3 
 set :repository,  "git@github.com:benhall2121/jm.git" # replace neerajdotname with your github username
 set :use_sudo, false
@@ -13,7 +13,7 @@ set :deploy_via, :copy
 # this will make sure that capistrano checks out the submodules if any
 set :git_enable_submodules, 1
 
-set(:application) { "50.57.64.194" } # replace gitlearn with your application name
+set :application, '50.57.64.194' # replace gitlearn with your application name
 set (:deploy_to) { "/home/#{user}/apps/#{application}" }
 set :copy_remote_dir, "/home/#{user}/tmp"
 
