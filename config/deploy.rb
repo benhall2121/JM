@@ -1,18 +1,20 @@
-set :application, "benerino.com"
-set :user, "ben"
-set :repository, "git@github.com:benhall2121/JM.git"
+set :application, "jm"
+set :repository,  "git@github.com:benhall2121/JM.git"
+set :rails_env, "production"
 
-set :deploy_to, "/home/#{user}/public_html/#{application}"
+set :scm, "git"
 
-# If you aren't deploying to /u/apps/#{application} on the target
-# servers (which is the default), you can specify the actual location
-# via the :deploy_to variable:
-# set :deploy_to, "/var/www/#{application}"
+set :deploy_via, :remote_cache
+server = 'benerino.com'
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
+set :user, 'ben'
+set :password, '212134'
+set :use_sudo, false
 
-role :app, application
-role :web, application
-role :db,  application, :primary => true
+role :web, server
+role :app, server
+role :db,  server, :primary => true
+
+set :deploy_to, "/home/#{user}/apps/#{application}"
+
+
