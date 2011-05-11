@@ -1,0 +1,43 @@
+<div class="mainOverview">
+<div class="mainOverview-left-coulmn">
+Today's Tasks
+
+<ul>
+  <% if !taken_todays_poll %>
+    <li>Take today's poll to the right</li>
+  <% end %>
+  <% if !commentary_created_today %>
+    <li>Create a commentary item</li>
+  <% end %>
+  <% if !boost_commentary_today %>
+    <li>Boost a commentary item</li>
+  <% end %>
+  <% if !share_commentary_today %>
+    <li>Share Something to Facebook</li>
+  <% end %>
+</ul>
+
+</div>
+
+<div class="mainOverview-right-coulmn">
+
+<div class="mainOverview-right-coulmn-top">
+ Today's Poll
+ <div class="form_row" id="poll_div">
+    <label for="poll">Which Answer do you like the most?</label>
+    <% [ 'Option 1', 'Option 2', 'Option 3', 'Option 4'].each do |poll| %>
+      <br><%= radio_button_tag 'poll', poll %>
+      <%= poll.humanize %>
+    <% end %>
+ </div>
+ <%= link_to_function image_tag('/images/vote_50.png'),'poll_vote()',:id => 'poll_button' %>
+</div>
+
+<div class="mainOverview-right-coulmn-bottom">
+ bottom
+</div>
+
+</div>
+
+
+</div>

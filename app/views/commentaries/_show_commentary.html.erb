@@ -1,0 +1,23 @@
+<% i = 0 %>
+<% @commentaries.each do |commentary| %>
+<% if i == 0 %>
+<div class="commentary_wrapper left_column">
+<% i = 1 %>
+<% else %>
+<div class="commentary_wrapper right_column">
+<% i = 0 %>
+<% end %>
+  <div class="commentary_boost">
+    <% if !Boost.find_by_user_id_and_commentary_id(current_user.id, commentary.id) %>
+      <%= link_to 'Boost', boosts_path(:commentaries_id => commentary), :method => :post %>
+    <% else %>
+      <%= link_to 'Boosted', boost_path(:id => commentary), :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
+  </div>
+  <div class="commentary_whole">
+    <div class="commentary_title"><%= link_to commentary.title, commentary %></div>
+    <div class="commentary_links"><%= link_to commentary.links, commentary.links, :target => 'blank' %></div>
+    <div class="commentary_body"><%= truncate(commentary.body, :length => 80) %></div>
+  </div>
+</div>
+<% end %>

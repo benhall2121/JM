@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to '(Edit)', edit_commentary_path(@commentary) %>
+<%= link_to 'Destroy', @commentary, :confirm => 'Are you sure?', :method => :delete %>
+
+<p>
+  <b>Title:</b>
+  <%= @commentary.title %>
+</p>
+
+<p>
+  <b>Links:</b>
+  <%= @commentary.links %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @commentary.body %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @commentary.user_id %>
+</p>
+
+
+<%= link_to 'View All Commentaries', commentaries_path %>

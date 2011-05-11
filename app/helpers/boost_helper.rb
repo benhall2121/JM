@@ -1,0 +1,2 @@
+module BoostHelper
+end

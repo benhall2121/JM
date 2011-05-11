@@ -1,0 +1,19 @@
+
+<% @commentaries.each do |commentary| %>
+<div class="commentary_wrapper left_column">
+<div class="commentary_whole">
+    <div class="commentary_title"><%= link_to commentary.title, commentary %></div>
+    <div class="commentary_links"><%= link_to commentary.links, commentary.links, :target => 'blank' %></div>
+    <div class="commentary_body"><%= truncate(commentary.body, :length => 80) %></div>
+</div>
+
+</div>
+
+<div class="commentary_wrapper right_column">
+<div class="commentary_whole share_link">
+ <%= link_to_function image_tag('/images/squareFaceBookIcon32.png', :class => 'share_link_image'), 'share(' + (commentary.id.to_s) +')' %>
+</div>
+
+</div>
+<br />
+<% end %>

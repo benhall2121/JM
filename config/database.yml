@@ -1,0 +1,21 @@
+
+development:
+  adapter: mysql2
+  database: jm_development
+  username: root
+  password:
+  encoding: utf8
+
+test:
+  adapter: mysql2
+  database: jm_test
+  username: root
+  password:
+  encoding: utf8
+
+production:
+  adapter: mysql2
+  database: jm_production
+  encoding: utf8
+  username: root
+  password:
