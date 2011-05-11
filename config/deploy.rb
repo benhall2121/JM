@@ -5,7 +5,7 @@ set :rails_env, "production"
 set :scm, "git"
 
 set :deploy_via, :remote_cache
-server = 'benerino.com'
+server = '50.57.64.194'
 
 set :user, 'ben'
 set :password, '212134'
