@@ -11,29 +11,28 @@
 <body>
 
 <div class="all">
-    <div id="nav">
-        <% if current_user %>
-        <%= link_to "Edit Profile", edit_user_path(current_user.id)%> |
-        <%= link_to "Logout", :logout%>
-        <% else %>
-        <%= link_to "Register", new_user_path%> | 
-        <%= link_to "Login", :login %> 
-        <% end %>
-    </div>
     <% if current_user %>
     <div id="firstNav">
         <div id="history_count" class="history_count"><%= current_user.histories.count %></div>
     	<div class="home_header"><%= link_to "Home", user_path(current_user.id) %></div> 
     	<div class="about_header"><%= link_to "About", page_path(1) %></div>
     </div>
-    <% end %>
     <div id="secondNav">
     	<%= link_to "Create", new_commentary_path %> | 
     	<%= link_to "Boost", commentaries_path %> | 
     	<%= link_to "Share", shareable_commentaries_path %>
     </div>
+    
+    <% end %>
 
 <%= yield %>
+</div>
+
+<div class="footer">
+    <% if current_user %>
+      <%= link_to "Edit Profile", edit_user_path(current_user.id)%> |
+      <%= link_to "Logout", :logout%>
+   <% end %>
 </div>
 </body>
 </html>

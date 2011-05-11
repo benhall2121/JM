@@ -47,14 +47,32 @@ div.field, div.actions {
   list-style: square;
 }
 
-.all{
+.all, .footer{
   width:1000px; 
   margin-left:auto; 
   margin-right:auto;
 }
 
-#nav{
- 	
+.footer{
+ text-align:right;
+ font-size:12px;
+ padding-right:15px;
+}
+
+.login_screen{
+ text-align:center;	
+}
+
+.center_div{
+ margin-left:auto;
+ margin-right:auto;
+ text-align:center;	
+}
+
+.center_div label{
+ width:150px;
+ display:inline-block;
+ text-align:right;
 }
 
 #firstNav{	
@@ -110,25 +128,38 @@ div.field, div.actions {
 }
 
 .mainOverview-left-coulmn{
-  border: 1px solid purple;
-  width:47%;
+  padding:7px;
+  border: 1px solid #B0B0B0;
+  width:47.5%;
   float:left;
   margin:10px 5px 10px 10px;
+  height:400px;
 }
 
 .mainOverview-right-coulmn{
-  border: 1px solid purple;
-  width:47%;
+  width:47.5%;
   float:right;
   margin:10px 10px 10px 5px;
+  height:400px;
 }
 
 .mainOverview-right-coulmn-top{
- border:1px solid black;	
+ padding:7px;
+ margin-bottom:16px;
+ height:46%;
+ border:1px solid #B0B0B0;
+}
+
+.mainOverview-right-coulmn-top div.form_row{
+ text-align:center;
 }
 
 .mainOverview-right-coulmn-bottom{
- border:1px solid orange;	
+ padding:7px;
+ text-align:center;
+ margin-top:16px;
+ height:46%;
+ border:1px solid #B0B0B0;	
 }
 
 .all_commentary{
