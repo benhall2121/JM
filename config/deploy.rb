@@ -1,5 +1,5 @@
 #set :stages, %w(production staging)
-require 'capistrano/ext/multistage'
+#require 'capistrano/ext/multistage'
 
 server "benerino.com", :app, :web, :db, :primary => true
 
@@ -15,7 +15,7 @@ set :git_enable_submodules, 1
 
 set :application, 'jm' # replace gitlearn with your application name
 set (:deploy_to) { "/home/#{user}/apps/#{application}" }
-set :copy_remote_dir, "/home/#{user}/tmp"
+#set :copy_remote_dir, "/home/#{user}/tmp"
 
 # source: http://tomcopeland.blogs.com/juniordeveloper/2008/05/mod_rails-and-c.html
 namespace :deploy do
