@@ -7,7 +7,9 @@ function poll_vote(){
   //$('div#poll_div').attr('disabled', true);
   var history_count = $('#history_count').html();
 	
-  $('#history_count').html(parseInt(history_count) + 1);	
+  $('#history_count').html(parseInt(history_count) + 1);
+  $('#ttp').addClass('finishedTodaysTasks');
+  $('#poll_div').html("Thank you for taking today's poll");
  });
  
  return false;

@@ -4,17 +4,32 @@ Today's Tasks
 
 <ul>
   <% if !taken_todays_poll %>
-    <li>Take today's poll to the right</li>
-  <% end %>
+    <li id="ttp">
+    <% else %>
+    <li  id="ttp" class="finishedTodaysTasks">
+    <% end %>
+    Take today's poll to the right</li>
+  
   <% if !commentary_created_today %>
-    <li>Create a commentary item</li>
-  <% end %>
+    <li>
+     <% else %>
+    <li class="finishedTodaysTasks">
+    <% end %>
+    Create a commentary item</li>
+    
   <% if !boost_commentary_today %>
-    <li>Boost a commentary item</li>
-  <% end %>
+    <li>
+     <% else %>
+    <li class="finishedTodaysTasks">
+    <% end %>
+    Boost a commentary item</li>
+
   <% if !share_commentary_today %>
-    <li>Share Something to Facebook</li>
-  <% end %>
+    <li>
+     <% else %>
+    <li class="finishedTodaysTasks">
+    <% end %>
+    Share Something to Facebook</li>
 </ul>
 
 </div>
@@ -23,7 +38,9 @@ Today's Tasks
 
 <div class="mainOverview-right-coulmn-top">
  <div>Today's Poll</div>
+ 
  <div class="form_row" id="poll_div">
+ <% if !taken_todays_poll %>
     <label for="poll">Which Answer do you like the most?</label>
     <% [ 'Option 1', 'Option 2', 'Option 3', 'Option 4'].each do |poll| %>
       <br><%= radio_button_tag 'poll', poll %>
@@ -31,7 +48,12 @@ Today's Tasks
     <% end %>
     <br />
  <%= link_to_function image_tag('/images/vote_50.png'),'poll_vote()',:id => 'poll_button' %>
+ <% else %>
+ Thank you for taking today's poll
+ <% end %>
  </div>
+ 
+ 
 </div>
 
 <div class="mainOverview-right-coulmn-bottom">
