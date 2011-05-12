@@ -1,11 +1,11 @@
-set :stages, %w(production staging)
+#set :stages, %w(production staging)
 require 'capistrano/ext/multistage'
 
-server "50.57.64.194", :app, :web, :db, :primary => true
+server "benerino.com", :app, :web, :db, :primary => true
 
 set :user, 'demo'
 set :keep_releases, 3 
-set :repository,  "git@github.com:benhall2121/jm.git" # replace neerajdotname with your github username
+set :repository,  "git@github.com:benhall2121/JM.git" # replace neerajdotname with your github username
 set :use_sudo, false
 set :scm, :git
 set :deploy_via, :copy
@@ -13,7 +13,7 @@ set :deploy_via, :copy
 # this will make sure that capistrano checks out the submodules if any
 set :git_enable_submodules, 1
 
-set :application, '50.57.64.194' # replace gitlearn with your application name
+set :application, 'jm' # replace gitlearn with your application name
 set (:deploy_to) { "/home/#{user}/apps/#{application}" }
 set :copy_remote_dir, "/home/#{user}/tmp"
 
@@ -35,8 +35,5 @@ namespace :deploy do
   end
   
 end
-
-ssh_options[:keys] = %w(/users/demo/.ssh/id_rsa)
-ssh_options[:paranoid] = false 
+ 
 ssh_options[:port] = 30000
-default_run_options[:pty] = true
