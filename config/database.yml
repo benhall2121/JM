@@ -13,17 +13,17 @@ test:
   password:
   encoding: utf8
 
-#production:
-# adapter: mysql2
-#  database: jm_production
-#  encoding: utf8
-#  username: root
-#  password:
-    
 production:
-   adapter: mysql2
-   encoding: utf8
-   database: jm_production
-   username: ben # the mysql username you are going to use. this could be root, but it probably isn't the best idea to use root
-   password: 212134 # the mysql password you are going to use.
-   socket: /var/run/mysqld/mysqld.sock
+ adapter: mysql2
+  database: jm_production
+  encoding: utf8
+  username: root
+  password:
+    
+#production:
+#   adapter: mysql2
+##   encoding: utf8
+#   database: jm_production
+#   username: ben # the mysql username you are going to use. this could be root, but it probably isn't the best idea to use root
+#   password: 212134 # the mysql password you are going to use.
+#   socket: /var/run/mysqld/mysqld.sock
