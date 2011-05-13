@@ -87,7 +87,7 @@ class UsersController < ApplicationController
   
   def poll_taken
   #If the poll section is built out this should be moved to that controller
-  if !History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Poll Taken', Time.now-1.day])
+  if !History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Poll Taken', (Date.today-1.day).to_s + ' 23:59:59'], :order => "datetime DESC")
     answer = params[:poll_id].delete "Option "
     History.create_history(:user_id => current_user.id, :history_id => answer.to_i, :history_type => 'Poll Taken', :datetime => Time.current )
   end 

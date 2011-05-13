@@ -18,9 +18,9 @@
     	<div class="about_header"><%= link_to "About", page_path(1) %></div>
     </div>
     <div id="secondNav">
-    	<%= link_to "Create", new_commentary_path %> | 
-    	<%= link_to "Boost", commentaries_path %> | 
-    	<%= link_to "Share", shareable_commentaries_path %>
+        <%= link_to(new_commentary_path) do %><div class="secondNavButton">Create</div><% end %>
+    	<%= link_to(commentaries_path) do %><div class="secondNavButton">Boost</div><% end %>
+    	<%= link_to(commentaries_path) do %><div class="secondNavButton">Share</div><% end %>
     </div>
     
     <% end %>

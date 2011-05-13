@@ -131,6 +131,27 @@ a:hover{
   -moz-box-shadow: 0px 0px 5px #B0B0B0;
 }
 
+#secondNav a{
+  margin: 0 50px 0 50px;		
+}
+
+.secondNavButton{
+ display:inline-block;
+ border: 1px solid #848484;
+ margin: 2px 0 2px 0;
+ padding:1px 30px 1px 30px;
+ font-size:20px;
+ -moz-border-radius: 5px;
+ -webkit-border-radius: 5px;
+}
+
+.secondNavButton:hover{
+ background-color:#FDFDFD;
+ border:1px solid #222;
+ color:#000;
+}
+
+
 .mainOverview{
   display: inline-block;
   width: 100%;
@@ -161,6 +182,30 @@ a:hover{
 
 .mainOverview-right-coulmn-top div.form_row{
  text-align:center;
+}
+
+.mainOverview-right-coulmn-top div.form_row .poll_div{
+ margin: 10px 70px 0 0;
+ text-align:right;
+}
+
+.poll_button{
+ border: 1px solid #343434;
+ margin: 2px 0 2px 0;
+ padding:1px 10px 1px 10px;
+ font-size: 12px;
+ box-shadow: 2px 2px 0px #343434;
+ -webkit-box-shadow: 2px 2px 0px #343434;
+ -moz-box-shadow: 2px 2px 0px #343434;
+}
+
+.poll_button:hover{
+ background-color:#FDFDFD;
+ border:1px solid #616161;
+ color:#616161;
+ box-shadow: 2px 2px 0px #999;
+ -webkit-box-shadow: 2px 2px 0px #616161;
+ -moz-box-shadow: 2px 2px 0px #999;
 }
 
 .mainOverview-right-coulmn-bottom{

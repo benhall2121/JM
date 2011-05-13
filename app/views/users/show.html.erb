@@ -39,14 +39,14 @@ Today's Tasks
  
  <div class="form_row" id="poll_div">
  <% if !taken_todays_poll %>
-    <label for="poll">Which Answer do you like the most?</label>
+    <label for="poll">Which Answer do you like the most?</label><br />
     <% [ 'Option 1', 'Option 2', 'Option 3', 'Option 4'].each do |poll| %>
       <br><%= radio_button_tag 'poll', poll %>
       <%= poll.humanize %>
     <% end %>
-    <br />
- <%= link_to_function image_tag('/images/vote_50.png'),'poll_vote()',:id => 'poll_button' %>
+ <div class="poll_div"><%= link_to_function 'Vote','poll_vote()',:id => 'poll_button', :class => 'poll_button' %></div>
  <% else %>
+ <br />
  Thank you for taking today's poll
  <% end %>
  </div>
