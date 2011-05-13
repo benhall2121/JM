@@ -5,8 +5,8 @@ class History < ActiveRecord::Base
   
   def self.create_history(params)
     history = History.find_by_history_type_and_history_id_and_user_id(params[:history_type], params[:history_id], params[:user_id])
-    if history
-      history.datetime = params[:date]
+    if history && params[:history_type] != 'Poll Taken'
+      history.datetime = params[:datetime]
       history.save!
     else
       History.new(params).save!
