@@ -10,26 +10,24 @@ Today's Tasks
     <% end %>
     Take today's poll to the right</li>
   
-  <% if !commentary_created_today %>
-    <li>
+  <% if commentary_created_today %>
+  	<li class="finishedTodaysTasks">Create a commentary item</li>  
      <% else %>
-    <li class="finishedTodaysTasks">
+     	<li><%= link_to "Create a commentary item", new_commentary_path %></li>
     <% end %>
-    Create a commentary item</li>
     
-  <% if !boost_commentary_today %>
-    <li>
+  <% if boost_commentary_today %>
+    <l class="finishedTodaysTasks"i>Boost a commentary item</li>
      <% else %>
-    <li class="finishedTodaysTasks">
+    <li><%= link_to "Boost a commentary item", commentaries_path %></li>
     <% end %>
-    Boost a commentary item</li>
 
-  <% if !share_commentary_today %>
-    <li>
+  <% if share_commentary_today %>
+    <li class="finishedTodaysTasks">Share Something to Facebook</li>
      <% else %>
-    <li class="finishedTodaysTasks">
+    <li><%= link_to "Share Something to Facebook", shareable_commentaries_path %></li>
     <% end %>
-    Share Something to Facebook</li>
+ 
 </ul>
 
 </div>

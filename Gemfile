@@ -8,7 +8,6 @@ gem 'rails', '3.0.3'
 gem 'mysql2', '< 0.3'
 gem 'authlogic'
 gem 'jquery-rails'
-gem 'mongrel'
 
 # Use unicorn as the web server
 # gem 'unicorn'

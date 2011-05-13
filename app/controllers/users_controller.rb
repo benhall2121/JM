@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
-  def index
+  def index 
+    if current_user
+      redirect_to :action => 'show', :id => current_user.id
+    else
     @users = User.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
+    end
     end
   end
 
