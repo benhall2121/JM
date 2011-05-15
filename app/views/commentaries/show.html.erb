@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user %>
+<% if current_user.id == @commentary.user_id %>
   <%= link_to '(Edit)', edit_commentary_path(@commentary) %> |
   <%= link_to 'Delete', @commentary, :confirm => 'Are you sure?', :method => :delete %>
 <% end %>
