@@ -1,31 +1,33 @@
 <div class="mainOverview">
 <div class="mainOverview-left-coulmn">
-Today's Tasks
+<div class="show_page_header_titles">Today's Tasks</div>
 
-<ul>
+<ul class="ttul">
   <% if !taken_todays_poll %>
-    <li id="ttp">
+    <div id="ttp">
+    <%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %>
     <% else %>
-    <li  id="ttp" class="finishedTodaysTasks">
+    <div  id="ttp" class="finishedTodaysTasks">
+    <%= image_tag('/images/checked.png', :class=> "home_checkbox") %>
     <% end %>
-    Take today's poll to the right</li>
-  
-  <% if commentary_created_today %>
-  	<li class="finishedTodaysTasks">Create a commentary item</li>  
-     <% else %>
-     	<li><%= link_to "Create a commentary item", new_commentary_path %></li>
-    <% end %>
+    Take today's poll to the right</div>
     
-  <% if boost_commentary_today %>
-    <li class="finishedTodaysTasks">Boost a commentary item</li>
+  <% if commentary_created_today %>
+  	<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Create a commentary item</div>  
      <% else %>
-    <li><%= link_to "Boost a commentary item", commentaries_path %></li>
+     	<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Create a commentary item", new_commentary_path %></div>
     <% end %>
-
-  <% if share_commentary_today %>
-    <li class="finishedTodaysTasks">Share Something to Facebook</li>
+  
+  <% if boost_commentary_today %>
+    <div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Boost a commentary item</div>
      <% else %>
-    <li><%= link_to "Share Something to Facebook", shareable_commentaries_path %></li>
+    <div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Boost a commentary item", commentaries_path %></div>
+    <% end %>
+  
+  <% if share_commentary_today %>
+    <div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Share Something to Facebook</div>
+     <% else %>
+    <div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Share Something to Facebook", shareable_commentaries_path %></div>
     <% end %>
  
 </ul>
@@ -35,7 +37,7 @@ Today's Tasks
 <div class="mainOverview-right-coulmn">
 
 <div class="mainOverview-right-coulmn-top">
- <div>Today's Poll</div>
+ <div class="show_page_header_titles">Today's Poll</div>
  
  <div class="form_row" id="poll_div">
  <% if !taken_todays_poll %>
@@ -44,7 +46,7 @@ Today's Tasks
       <br><%= radio_button_tag 'poll', poll %>
       <%= poll.humanize %>
     <% end %>
- <div class="poll_div"><%= link_to_function 'Vote','poll_vote()',:id => 'poll_button', :class => 'poll_button' %></div>
+ <div class="poll_button_div"><%= link_to_function 'Vote','poll_vote()',:id => 'poll_button', :class => 'shaded_button' %></div>
  <% else %>
  <br />
  Thank you for taking today's poll
@@ -55,7 +57,7 @@ Today's Tasks
 </div>
 
 <div class="mainOverview-right-coulmn-bottom">
- bottom
+ <div class="show_page_header_titles">Content Preview</div>
 </div>
 
 </div>

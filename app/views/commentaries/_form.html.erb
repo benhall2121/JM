@@ -12,18 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :placeholder => 'Title', :class => 'text_field' %>
   </div>
   <div class="field">
-    <%= f.label :links %><br />
-    <%= f.text_field :links %>
+    <%= f.text_field :links, :placeholder => 'Relevent Links', :class => 'text_field' %>
   </div>
   <div class="field">
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%= f.text_area :body, :placeholder => 'Enter your commentary.', :class => 'text_area' %>
   </div>
-  <div class="actions">
+  <div>
     <%= f.submit %>
   </div>
 <% end %>

@@ -4,7 +4,7 @@
 <div class="commentary_whole">
     <div class="commentary_title"><%= User.find(commentary.user_id).username %> ~ <%= link_to commentary.title, commentary %></div>
     <div class="commentary_links"><%= link_to commentary.links, commentary.links, :target => 'blank', :class => 'c-links' %></div>
-    <div class="commentary_body"><%= truncate(commentary.body, :length => 80) %></div>
+    <div class="commentary_body"><%= truncate(commentary.body, :length => 125) %></div>
 </div>
 
 </div>

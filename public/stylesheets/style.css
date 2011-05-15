@@ -1,3 +1,5 @@
+html {overflow-y: scroll;}
+
 body { color:#000; font-family: 'Cabin', arial, serif; }
 
 a { text-decoration: none; color:#000; }
@@ -5,11 +7,39 @@ a { text-decoration: none; }
 
 h1{
  margin-top:0px;
- margin-bottom:0px;
+ margin-bottom:3px;
+}
+
+.text_field, .text_area{
+ border: 1px solid #848484;
+ -moz-border-radius: 3px;
+ -webkit-border-radius: 3px;
+ padding-left:2px;
+ padding-right: 2px;
+ outline:none;
+}
+
+.text_field{
+  height:25px;	
+  width: 75%;
+}
+
+.text_field:hover, .text_area:hover{
+ border: 1px solid #616161;	
+}
+
+.text_area{
+  height:200px;		
+  width: 100%;
+  resize: none;
 }
 
 div.field, div.actions {
-  margin-bottom: 10px;
+  margin-bottom: 7px;
+}
+
+.section_desription{
+  margin:5px 0 0 0;	
 }
 
 a:hover{
@@ -166,6 +196,13 @@ a:hover{
   height:400px;
 }
 
+.home_checkbox{	
+}
+
+.show_page_header_titles{
+ text-align:left;	
+}
+
 .mainOverview-right-coulmn{
   width:47.5%;
   float:right;
@@ -184,14 +221,17 @@ a:hover{
  text-align:center;
 }
 
-.mainOverview-right-coulmn-top div.form_row .poll_div{
+.poll_button_div{
  margin: 10px 70px 0 0;
  text-align:right;
 }
 
-.poll_button{
+.boost_button_div {
+ margin: 0 0 7px 0;	
+}
+
+.shaded_button{
  border: 1px solid #343434;
- margin: 2px 0 2px 0;
  padding:1px 10px 1px 10px;
  font-size: 12px;
  box-shadow: 2px 2px 0px #343434;
@@ -199,7 +239,7 @@ a:hover{
  -moz-box-shadow: 2px 2px 0px #343434;
 }
 
-.poll_button:hover{
+.shaded_button:hover{
  background-color:#FDFDFD;
  border:1px solid #616161;
  color:#616161;
@@ -219,6 +259,12 @@ a:hover{
 .all_commentary{
  overflow:hidden;	
  padding-bottom:15px;
+}
+
+.new_commentary_main_div{
+ width:90%;
+ margin-left:auto;
+ margin-right:auto;
 }
 
 .commentary_wrapper{

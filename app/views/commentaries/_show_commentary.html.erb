@@ -7,19 +7,19 @@
 <div class="commentary_wrapper right_column">
 <% i = 0 %>
 <% end %>
-  <% if current_user %>
+  <% if logged_in? %>
   <div class="commentary_boost">
     <% if !Boost.find_by_user_id_and_commentary_id(current_user.id, commentary.id) %>
-      <%= link_to 'Boost', boosts_path(:commentaries_id => commentary), :method => :post %>
+      <div class="boost_button_div"><%= link_to 'Boost', boosts_path(:commentaries_id => commentary), :method => :post, :class => 'shaded_button' %></div>
     <% else %>
-      <%= link_to 'Boosted', boost_path(:id => commentary), :confirm => 'Are you sure?', :method => :delete %>
+      <div class="boost_button_div"><%= link_to 'Boosted', boost_path(:id => commentary), :confirm => 'Are you sure?', :method => :delete, :class => 'shaded_button' %></div>
     <% end %>
   </div>
   <% end %>
   <div class="commentary_whole">
     <div class="commentary_title"><%= User.find(commentary.user_id).username %> ~ <%= link_to commentary.title, commentary %></div>
     <div class="commentary_links"><%= link_to commentary.links, commentary.links, :target => 'blank', :class => 'c-links' %></div>
-    <div class="commentary_body"><%= truncate(commentary.body, :length => 80) %></div>
+    <div class="commentary_body"><%= truncate(commentary.body, :length => 125) %></div>
   </div>
 </div>
 <% end %>
