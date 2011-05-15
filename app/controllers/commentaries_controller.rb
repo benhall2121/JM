@@ -4,7 +4,7 @@ class CommentariesController < ApplicationController
   # GET /commentaries
   # GET /commentaries.xml
   def index
-    @commentaries = Commentary.all
+  	  @commentaries = Commentary.all(:order => 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class CommentariesController < ApplicationController
   
   def shareable
     boost = Boost.where("user_id=(?)", current_user).map(&:commentary_id)
-    @commentaries = Commentary.where("user_id=(?) OR id in (?)", current_user, boost)
+    @commentaries = Commentary.find(:all, :conditions => ["user_id=(?) OR id in (?)", current_user, boost], :order => 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
