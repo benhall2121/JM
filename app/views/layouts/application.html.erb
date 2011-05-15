@@ -11,28 +11,39 @@
 <body>
 
 <div class="all">
-    <% if current_user %>
+   <% if !(params[:controller] == 'users' && params[:action] == 'index') %>
     <div id="firstNav">
-        <div id="history_count" class="history_count"><%= current_user.histories.count %></div>
+      <% if logged_in? %>
+        <div id="history_count" class="history_count"><%= current_user.histories.count %></div> 
     	<div class="home_header"><%= link_to "Home", user_path(current_user.id) %></div> 
+      <% end %>   
     	<div class="about_header"><%= link_to "About", page_path(1) %></div>
     </div>
+    <% if current_user %>
     <div id="secondNav">
         <%= link_to(new_commentary_path) do %><div class="secondNavButton">Create</div><% end %>
     	<%= link_to(commentaries_path) do %><div class="secondNavButton">Boost</div><% end %>
-    	<%= link_to(commentaries_path) do %><div class="secondNavButton">Share</div><% end %>
+    	<%= link_to(shareable_commentaries_path) do %><div class="secondNavButton">Share</div><% end %>
     </div>
     
     <% end %>
+   <% end %>
 
 <%= yield %>
 </div>
 
+<% if !(params[:controller] == 'users' && params[:action] == 'index') %>
 <div class="footer">
     <% if current_user %>
       <%= link_to "Edit Profile", edit_user_path(current_user.id)%> |
       <%= link_to "Logout", :logout%>
    <% end %>
+   <% if !logged_in? %>
+     <%= link_to "Sign Up", new_user_path%> |
+     <%= link_to "Login", :login%>
+   <% end %>
 </div>
+<% end %>
+
 </body>
 </html>

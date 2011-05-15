@@ -14,6 +14,8 @@ Jm::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   
+  match 'signin' => 'users#new', :as => :signin
+  
   match '/(:permalink)' => 'pages#show', :permalink => 'about'
   
   match '/history/poll_taken' => 'users#poll_taken'

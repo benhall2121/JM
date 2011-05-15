@@ -1,8 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to '(Edit)', edit_commentary_path(@commentary) %>
-<%= link_to 'Destroy', @commentary, :confirm => 'Are you sure?', :method => :delete %>
-
+<% if current_user %>
+  <%= link_to '(Edit)', edit_commentary_path(@commentary) %> |
+  <%= link_to 'Delete', @commentary, :confirm => 'Are you sure?', :method => :delete %>
+<% end %>
+  
 <p>
   <b>Title:</b>
   <%= @commentary.title %>

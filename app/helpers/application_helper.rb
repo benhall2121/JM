@@ -31,5 +31,9 @@ module ApplicationHelper
       return false
     end
   end  
+  
+  def logged_in?
+    !!current_user
+  end
 	
 end
