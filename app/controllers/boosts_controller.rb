@@ -13,6 +13,10 @@ class BoostsController < ApplicationController
     end
   end
   
+  def show
+    redirect_to commentary_path(Boost.find(params[:id]).commentary_id)
+  end
+  
   def destroy
     @boost = Boost.find_by_user_id_and_commentary_id(current_user.id, params[:id])
     @boost.destroy

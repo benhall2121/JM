@@ -1,6 +1,8 @@
 class Boost < ActiveRecord::Base
-  belongs_to:user
-  belongs_to:history
+  belongs_to :user
+  belongs_to :commentary
+  
+  has_many :histories
   
   after_create  :add_history
   after_destroy :remove_history

@@ -1,0 +1,24 @@
+<div id="calendar">
+  <h2 id="month">
+    <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
+    <%=h @date.strftime("%B %Y") %>
+    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
+  </h2>
+  <%= calendar_for @histories, :year => @date.year, :month => @date.month do |calendar| %>
+    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
+    <%= calendar.day(:day_method => :created_at) do |date, histories| %>
+      <%= date.day %>
+      <ul>
+        <% for history in histories %>
+           <% if history.history_type == 'Create Commentary' || history.history_type == 'Share Commentary' %>
+             <li><%= link_to h(history.history_type), commentary_path(history.history_id) %></li>
+           <% elsif history.history_type == 'Boost Commentary' %>
+             <li><%= link_to h(history.history_type), boost_path(history.history_id) %></li>
+           <% else %>
+             <li><%= history.history_type %></li>
+           <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+</div>

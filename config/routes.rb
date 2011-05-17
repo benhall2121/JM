@@ -1,6 +1,8 @@
 Jm::Application.routes.draw do
   
   resources :pages
+  
+  resources :histories
 
   root :to => "users#index"	
 	

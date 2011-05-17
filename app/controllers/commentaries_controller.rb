@@ -4,7 +4,7 @@ class CommentariesController < ApplicationController
   # GET /commentaries
   # GET /commentaries.xml
   def index
-  	  @commentaries = Commentary.all(:order => 'created_at desc')
+    @commentaries = Commentary.all(:order => 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
