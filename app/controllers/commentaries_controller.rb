@@ -27,11 +27,11 @@ class CommentariesController < ApplicationController
   def show
   	  
     if params[:unique_id]
-      puts 'in unique 2222'
+      puts 'in unique 3333'
       strs = params[:unique_id]
       @quesy_hash={}
       
-      for str in strs.split("&")
+      for str in strs.split("$")
 	s= str.split("=")
 	@quesy_hash[s[0]]= s[1]
       end

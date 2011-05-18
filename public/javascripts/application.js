@@ -25,6 +25,9 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	
 	var url = "http://www.facebook.com/sharer.php?u=http://" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
 	
+	alert(encodeURI(url));
+	return;
+	
 	window.open(encodeURI(url));
 	
 	$.post('/commentaries/share_commentary', { "commentary_id": commentary_id }, function(response) {
@@ -39,7 +42,7 @@ function create_unique_id(commentary_id, current_user_id){
   var version = '1';
   var com_id = Math.pow(2,commentary_id);
   var cu_id = Math.pow(3,current_user_id);
-  var unique_id = 'v='+version+'&com='+com_id+'&cu='+cu_id
+  var unique_id = 'v='+version+'$com='+com_id+'$cu='+cu_id
   
   return unique_id;
 }
