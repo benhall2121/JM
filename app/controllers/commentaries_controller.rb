@@ -42,6 +42,15 @@ class CommentariesController < ApplicationController
       
       commentary_id = Math::log(com).div(Math::log(2))
       user_shared = Math::log(cu).div(Math::log(3))
+       
+      if current_user
+      puts 'current_user'
+      puts current_user.id
+      puts 'user_shared'
+      puts user_shared
+      puts 'compare'
+      puts current_user.id != user_shared
+      end
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
       if((request.env['REMOTE_HOST'] && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared))
