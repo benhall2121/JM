@@ -25,6 +25,43 @@ class CommentariesController < ApplicationController
   # GET /commentaries/1
   # GET /commentaries/1.xml
   def show
+  	  
+    if params[:unique_id]
+      puts 'in unique'
+      strs = params[:unique_id]
+      @quesy_hash={}
+      
+      for str in strs.split("&")
+	s= str.split("=")
+	@quesy_hash[s[0]]= s[1]
+      end
+     
+      if current_user
+      puts 'current_user'
+      puts current_user.id
+      end
+      
+      v = @quesy_hash['v'] # v is the version. If the conversion of for the url ever changes, change v so that any old url's using version 1 will still work
+      com = @quesy_hash['com'] # com is the commentary_id. com = 2 to the power of the original commentary_id. The inverse of this is log(@quesy_hash['com'])/log(2)
+      cu = @quesy_hash['cu'] # cu is the current_user_id. The current_user_id is the user who shared the commentary. cu = 3 to the power of the original current_user_id. The inverse of this is log(@quesy_hash['cu'])/log(3)
+      coming_from = request.env['HTTP_REFERER']
+      
+      commentary_id = Math::log(com).div(Math::log(2))
+      user_shared = Math::log(cu).div(Math::log(3))
+      
+      puts 'remote_host'
+      puts request.env['REMOTE_HOST']
+      puts 'domain'
+      puts request.domain
+      
+      #Check to make sure the site isn't just being refreshed and is coming from another site
+      if((request.env['REMOTE_HOST'] && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != cu))
+      puts 'if to send to history'
+       History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => request.env['REMOTE_ADDR'], :HttpReferrer => request.env['HTTP_REFERER'] )
+      end
+      
+      params[:id] = commentary_id
+    end
     @commentary = Commentary.find(params[:id])
 
     respond_to do |format|

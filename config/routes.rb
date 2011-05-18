@@ -22,6 +22,8 @@ Jm::Application.routes.draw do
   
   match '/history/poll_taken' => 'users#poll_taken'
   match '/commentaries/share_commentary' => 'commentaries#share_commentary'
+  
+  match '/shared_commentary/:shared_user_username/:commentary_title/:unique_id' => 'commentaries#show'
  
   # The priority is based upon order of creation:
   # first created -> highest priority.
