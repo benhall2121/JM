@@ -5,9 +5,10 @@ function poll_vote(){
   $.post('/history/poll_taken', { "poll_id":  $('input[name=poll]:checked').val() }, function(response) {
   // your js code that inserts data into the page
   //$('div#poll_div').attr('disabled', true);
-  var history_count = $('#history_count').html();
+  var history_count = $('#history_count a').html();
 	
   $('#history_count').html(parseInt(history_count) + 1);
+  $('img#poll_check_box').attr('src','/images/checked.png');
   $('#ttp').addClass('finishedTodaysTasks');
   $('#poll_div').html("Thank you for taking today's poll");
  });

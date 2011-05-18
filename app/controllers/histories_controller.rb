@@ -1,6 +1,6 @@
 class HistoriesController < ApplicationController
   def index
-    @histories = History.find(:all, :conditions => ["user_id = (?)", current_user.id])
+  	  @histories = History.find(:all, :conditions => ["user_id = (?)", current_user.id], :order => 'created_at desc')
     if params[:month]
       params[:month] += '-01'
       @date =  Date.parse(params[:month])   
@@ -10,7 +10,7 @@ class HistoriesController < ApplicationController
     
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @commentaries }
+      format.xml  { render :xml => @histories }
     end
   end
   
@@ -19,7 +19,7 @@ class HistoriesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @commentary }
+      format.xml  { render :xml => @history }
     end	
   end
   

@@ -5,7 +5,7 @@
 <ul class="ttul">
   <% if !taken_todays_poll %>
     <div id="ttp">
-    <%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %>
+    <%= image_tag('/images/unchecked.png', :class=> "home_checkbox", :id => "poll_check_box") %>
     <% else %>
     <div  id="ttp" class="finishedTodaysTasks">
     <%= image_tag('/images/checked.png', :class=> "home_checkbox") %>

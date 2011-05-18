@@ -1,24 +1,26 @@
-<div id="calendar">
-  <h2 id="month">
-    <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m") %>
-    <%=h @date.strftime("%B %Y") %>
-    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m") %>
-  </h2>
-  <%= calendar_for @histories, :year => @date.year, :month => @date.month do |calendar| %>
-    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') %>
-    <%= calendar.day(:day_method => :created_at) do |date, histories| %>
-      <%= date.day %>
-      <ul>
-        <% for history in histories %>
-           <% if history.history_type == 'Create Commentary' || history.history_type == 'Share Commentary' %>
-             <li><%= link_to h(history.history_type), commentary_path(history.history_id) %></li>
-           <% elsif history.history_type == 'Boost Commentary' %>
-             <li><%= link_to h(history.history_type), boost_path(history.history_id) %></li>
-           <% else %>
-             <li><%= history.history_type %></li>
-           <% end %>
-        <% end %>
-      </ul>
-    <% end %>
+<div class="histories_overview">
+  <% @histories.group_by(&:group_by_created_at).each do |created_at, histories| %>
+  <div class="history_date_header"><%= created_at %></div>
+   <% histories.group_by(&:group_by_history_type).each do |hist_type, hist| %>
+    
+    <div class="hist_type_header">+<%= hist.count %> 
+    
+      <% if hist_type == 'Poll Taken' %>
+       <%= hist_type %>
+      <% elsif hist_type == 'Create Commentary' %>
+       Created Commentary
+      <% elsif hist_type == 'Boost Commentary' %>
+       Boosted Commentary
+      <% elsif hist_type == 'Share Commentary' %>
+       Shared Commentary to Facebook
+      <% elsif hist_type == 'Shared Commentary Link' %>
+       Shared Commentary Link Clicked
+      <% else %>
+       <%= hist_type %>
+      <% end %>
+    
+    </div>
+
+   <% end %>
   <% end %>
 </div>

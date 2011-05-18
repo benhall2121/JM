@@ -135,6 +135,10 @@ a:hover{
  font-weight:bold;
 }
 
+.header{
+ margin-bottom:10px;	
+}
+
 #firstNav div.home_header{
  float:left;	
 }
@@ -192,7 +196,7 @@ a:hover{
   border: 1px solid #B0B0B0;
   width:47.5%;
   float:left;
-  margin:10px 5px 10px 10px;
+  margin:0px 5px 10px 10px;
   height:400px;
 }
 
@@ -206,7 +210,7 @@ a:hover{
 .mainOverview-right-coulmn{
   width:47.5%;
   float:right;
-  margin:10px 10px 10px 5px;
+  margin:0px 10px 10px 5px;
   height:400px;
 }
 
@@ -328,70 +332,26 @@ a:hover{
  color: #BBB;	
 }
 
-
-
-
-/*********** History Calendar Formatting  **********/
-#calendar table {
-  border-collapse: collapse;
-  width: 100%;
+.histories_overview{
+ width: 80%;
+ margin-left:auto;
+ margin-right:auto;
 }
 
-#calendar td,
-#calendar th {
-  font-family: "Lucida Grande",arial,helvetica,sans-serif;
-  font-size: 10px;
-  padding: 6px;
-  border: 1px solid #999;
+.history_date_header{
+ padding:10px 0 3px 0;
+ border-bottom: 1px solid #B0B0B0;
 }
 
-#calendar th {
-  background: #DDD;
-  color: #666;
-  text-align: center;
-  width: 14.2857142857143%;
+.hist_type_header{
+ width:75%;
+ margin-left:auto;
+ margin-right:auto;
+ padding:10px;
 }
 
-#calendar td {
-  background: #FFF;
-  color: #777;
-  height: 80px;
-  vertical-align: top;
-  font-size: 16px;
+.hist_type_descriptions{
+ display:none;	
 }
 
-#calendar .notmonth {
-  color: #CCC;
-}
-
-#calendar #month {
-  margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
-#calendar #month a, #calendar #month a:hover {
-  text-decoration: none;
-  padding: 0 10px;
-  color: #999;
-}
-
-#calendar .today {
-  background-color: #D7F2FF;
-}
-
-#calendar ul {
-  margin: 0;
-  margin-top: 5px;
-  padding: 0;
-  list-style: none;
-}
-
-#calendar li {
-  margin: 0;
-  padding: 0;
-  font-size: 11px;
-  text-align: center;
-}
 

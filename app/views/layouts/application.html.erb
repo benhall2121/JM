@@ -12,6 +12,7 @@
 <body>
 
 <div class="all">
+  <div class="header">
    <% if !(params[:controller] == 'users' && params[:action] == 'index') %>
     <div id="firstNav">
       <% if logged_in? %>
@@ -29,6 +30,7 @@
     
     <% end %>
    <% end %>
+  </div>
 
 <%= yield %>
 </div>

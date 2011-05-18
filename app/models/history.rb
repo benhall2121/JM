@@ -20,4 +20,18 @@ class History < ActiveRecord::Base
       History.new(params).save!
     end
   end
+  
+  def group_by_created_at
+    if self.created_at.to_date == Date.today	 
+      'Today'
+    elsif self.created_at.to_date == Date.today-1
+      'Yesterday'
+    else
+      self.created_at.strftime('%A %B %d, %Y')	
+    end
+  end
+  
+  def group_by_history_type
+    self.history_type
+  end
 end
