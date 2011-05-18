@@ -46,8 +46,21 @@ class CommentariesController < ApplicationController
       cu = @quesy_hash['cu'] # cu is the current_user_id. The current_user_id is the user who shared the commentary. cu = 3 to the power of the original current_user_id. The inverse of this is log(@quesy_hash['cu'])/log(3)
       coming_from = request.env['HTTP_REFERER']
       
+      puts '111'
+      puts 'com'
+      puts com
+      puts 'cu'
+      puts cu
+      puts 'v'
+      puts v
+      
       commentary_id = Math::log(com).div(Math::log(2))
+      
+      puts '222'
+      
       user_shared = Math::log(cu).div(Math::log(3))
+      
+      puts '333'
       
       puts 'remote_host'
       puts request.env['REMOTE_HOST']
