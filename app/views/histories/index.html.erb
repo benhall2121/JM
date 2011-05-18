@@ -1,5 +1,5 @@
 <div class="histories_overview">
-  <% @histories.group_by(&:group_by_created_at).sort.each do |created_at, histories| %>
+  <% @histories.group_by(&:group_by_created_at).each do |created_at, histories| %>
   <div class="history_date_header"><%= created_at %></div>
    <% histories.group_by(&:group_by_history_type).sort.each do |hist_type, hist| %>
     
