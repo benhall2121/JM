@@ -27,7 +27,7 @@ class CommentariesController < ApplicationController
   def show
   	  
     if params[:unique_id]
-      puts 'in unique 3333'
+      puts 'in unique 3333222'
       strs = params[:unique_id]
       @quesy_hash={}
       
