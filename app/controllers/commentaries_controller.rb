@@ -27,7 +27,7 @@ class CommentariesController < ApplicationController
   def show
   	  
     if params[:unique_id]
-      puts 'in unique'
+      puts 'in unique 2222'
       strs = params[:unique_id]
       @quesy_hash={}
       
@@ -41,9 +41,14 @@ class CommentariesController < ApplicationController
       puts current_user.id
       end
       
+      puts 'aaa'
+      
       v = @quesy_hash['v'] # v is the version. If the conversion of for the url ever changes, change v so that any old url's using version 1 will still work
+     puts 'bbb'
       com = @quesy_hash['com'] # com is the commentary_id. com = 2 to the power of the original commentary_id. The inverse of this is log(@quesy_hash['com'])/log(2)
+      puts 'ccc'
       cu = @quesy_hash['cu'] # cu is the current_user_id. The current_user_id is the user who shared the commentary. cu = 3 to the power of the original current_user_id. The inverse of this is log(@quesy_hash['cu'])/log(3)
+      puts 'ddd'
       coming_from = request.env['HTTP_REFERER']
       
       puts '111'
