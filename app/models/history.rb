@@ -14,10 +14,8 @@ class History < ActiveRecord::Base
     	shared_history = History.find_by_history_type_and_history_id_and_user_id_and_ipaddress_and_HttpReferrer(params[:history_type], params[:history_id], params[:user_id], params[:ipaddress], params[:HttpReferrer], :order => 'created_at desc')
     	
     	if shared_history &&  params[:datetime] < (shared_history.created_at + 5.minutes)
-    	  puts 'in update link'	
     	  shared_history.save!
   	else
-  	  puts 'in create link'	
   	  History.new(params).save!  
     	end	
     else
