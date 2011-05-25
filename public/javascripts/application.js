@@ -18,7 +18,7 @@ function poll_vote(){
 }
 
 function share(commentary_id, commentary_title, current_user_name, current_user_id, to_where){
-	alert(to_where);
+	
 	if(to_where == undefined || to_where == ""){
 	 to_where = "facebook";
 	}
@@ -33,7 +33,6 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	} else {
 	  var url = "http://www.facebook.com/sharer.php?u=http://" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
 	}
-	alert(url);
 	
 	window.open(encodeURI(url));
 	
