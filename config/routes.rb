@@ -4,7 +4,7 @@ Jm::Application.routes.draw do
   
   resources :histories
 
-  root :to => "users#index"	
+  root :to => "users#new"	
 	
   resources :commentaries do
   	  get :shareable, :on => :collection
@@ -17,11 +17,15 @@ Jm::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
   
   match 'signin' => 'users#new', :as => :signin
+  match 'create_boost/(:commentaries_id)' => 'boosts#create', :as => :create_boost
+  match 'destroy_boost/(:commentaries_id)' => 'boosts#destroy', :as => :destroy_boost
   
   match '/(:permalink)' => 'pages#show', :permalink => 'about'
   
   match '/history/poll_taken' => 'users#poll_taken'
   match '/commentaries/share_commentary' => 'commentaries#share_commentary'
+  match '/commentaries/get_link_info' => 'commentaries#get_link_info'
+  match '/commentaries/create' => 'commentaries#create'
   
   match '/shared_commentary/:shared_user_username/:commentary_title/:unique_id' => 'commentaries#show'
  

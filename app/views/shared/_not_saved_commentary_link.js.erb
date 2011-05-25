@@ -1,0 +1,7 @@
+$(".preview").fadeOut('fast');
+$(".link_shareable").html("This link already exists in the library for you to share.");
+$(".link_share_me div.commentary_links_fp").html("<%= escape_javascript(u[:title]) %> <br/> <%= escape_javascript(u[:links]) %>");
+$(".link_share_me div.fb_tw_fp").html("<a href='#' onclick='share(&quot;<%= escape_javascript(u[:id].to_s) %>&quot;, &quot;<%= escape_javascript(u[:title]) %>&quot;, &quot;<%= current_user.username %>&quot;, &quot;<%= current_user.id.to_s %>&quot;, &quot;facebook&quot;)'><img alt='Squarefacebookicon24' src='/images/squareFaceBookIcon24.png' /></a>  <a href='#' onclick='share(&quot;<%= escape_javascript(u[:id].to_s) %>&quot;, &quot;<%= escape_javascript(u[:title]) %>&quot;, &quot;<%= current_user.username %>&quot;, &quot;<%= current_user.id.to_s %>&quot;, &quot;twitter&quot;)'><img alt='TwitterIcon24' src='/images/twitter24.png' /></a>");
+$(".save_preview").fadeIn('fast');
+
+

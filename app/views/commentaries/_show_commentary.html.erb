@@ -10,9 +10,9 @@
   <% if logged_in? %>
   <div class="commentary_boost">
     <% if !Boost.find_by_user_id_and_commentary_id(current_user.id, commentary.id) %>
-      <div class="boost_button_div"><%= link_to 'Boost', boosts_path(:commentaries_id => commentary), :method => :post, :class => 'shaded_button' %></div>
+      <div class="boost_button_div"><%= link_to 'Boost', create_boost_path(:commentaries_id => commentary), :method => :post, :class => 'shaded_button' %></div>
     <% else %>
-      <div class="boost_button_div"><%= link_to 'Boosted', boost_path(:id => commentary), :confirm => 'Are you sure?', :method => :delete, :class => 'shaded_button' %></div>
+      <div class="boost_button_div"><%= link_to 'Boosted', destroy_boost_path(:commentaries_id => commentary), :confirm => 'Are you sure?', :class => 'shaded_button' %></div>
     <% end %>
   </div>
   <% end %>

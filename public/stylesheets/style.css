@@ -1,6 +1,6 @@
 html {overflow-y: scroll;}
 
-body { color:#000; font-family: 'Cabin', arial, serif; }
+body { color:#222; font-family: 'Cabin', arial, serif; }
 
 a { text-decoration: none; color:#000; }
 a { text-decoration: none; }
@@ -24,7 +24,7 @@ h1{
   width: 75%;
 }
 
-.text_field:hover, .text_area:hover{
+.text_field:hover, .text_area:hover, .text_field:focus, .text_area:focus{
  border: 1px solid #616161;	
 }
 
@@ -185,6 +185,11 @@ a:hover{
  color:#000;
 }
 
+.small_link{
+ text-align:right;
+ font-size:10px;
+ padding-right: 10px;
+}
 
 .mainOverview{
   display: inline-block;
@@ -192,23 +197,70 @@ a:hover{
 }
 
 .mainOverview-left-coulmn{
+  width:33.5%;
+  float:left;
+  margin:0px 10px 10px 5px;
+  height:400px;
+}
+
+.mainOverview-welcome-name, .mainOverview-user-stats, .mainOverview-tasks{
   padding:7px;
   border: 1px solid #B0B0B0;
-  width:47.5%;
-  float:left;
-  margin:0px 5px 10px 10px;
-  height:400px;
+}
+
+.mainOverview-welcome-name{
+  height:20px;
+  margin-bottom:10px;
+}
+
+.mainOverview-user-stats{
+  margin-bottom:10px;
+} 
+
+.mainOverview-user-stats div{
+ display:inline-block;
+ width: 32%;
+ text-align:center;
+}
+
+.mainOverview-user-stats div.PageViews{
+ border-left:1px solid black;
+ border-right:1px solid black;	
+}
+
+.mainOverview-tasks ul{
+  margin:0px;
+  padding:15px;
+}
+
+.ttul{
+ border-top:1px solid #B0B0B0;	
+ padding-top: 5px;
+}
+
+.ttul div{
+ padding:5px;	
 }
 
 .home_checkbox{	
 }
 
 .show_page_header_titles{
- text-align:left;	
+ text-align:left;
+ font-weight:bold;
+}
+
+.center_header{
+ text-align:center;	
+}
+
+.show_page_header_titles_small{
+ font-size:10px;	
+ padding-bottom:5px
 }
 
 .mainOverview-right-coulmn{
-  width:47.5%;
+  width:63%;
   float:right;
   margin:0px 10px 10px 5px;
   height:400px;
@@ -216,13 +268,25 @@ a:hover{
 
 .mainOverview-right-coulmn-top{
  padding:7px;
- margin-bottom:16px;
- height:46%;
+ margin-bottom:10px;
  border:1px solid #B0B0B0;
 }
 
 .mainOverview-right-coulmn-top div.form_row{
  text-align:center;
+}
+
+.scraperFields div{
+  display:inline-block;	
+}
+
+#scraper_input_div{
+ margin-left:4px;	
+}
+
+#scraper_input_id {
+ width:375px;
+ height:18px;
 }
 
 .poll_button_div{
@@ -255,8 +319,7 @@ a:hover{
 .mainOverview-right-coulmn-bottom{
  padding:7px;
  text-align:center;
- margin-top:16px;
- height:46%;
+ margin-top:10px;
  border:1px solid #B0B0B0;	
 }
 
@@ -284,6 +347,38 @@ a:hover{
  width:100%;
  height:80px;
  padding:4px;
+}
+
+.commentary_whole_fp{
+ display:inline-block;	
+ width:95%;
+ border-bottom: 1px solid #B0B0B0;
+ padding-bottom: 5px;
+ padding-top: 5px;
+ margin-left:auto;
+ margin-right:auto;
+}
+
+.commentary_whole_fp div{
+ display:inline-block;	
+}
+
+.commentary_links_fp{
+ width: 49%;
+ font-size:12px;
+ height: 18px;
+ vertical-align:center;
+ text-align:left;
+}
+
+.fb_tw_fp{
+ width: 49%;
+ height: 24px;	
+ vertical-align:bottom;
+}
+
+.fb_tw_fp img{
+ padding-left:15px;	
 }
 
 .commentary_boost{
@@ -352,6 +447,23 @@ a:hover{
 
 .hist_type_descriptions{
  display:none;	
+}
+
+.link_shareable{
+ width:98%;
+ border-bottom: 1px solid #B0B0B0;
+ padding:3px;
+ margin:3px;
+ font-size:16px;
+}
+
+.link_share_me div.commentary_links_fp, .link_share_me div.fb_tw_fp{
+ display:inline-block;
+ padding:5px 0 5px 3px;
+}
+
+.add_new_button{
+ text-align:right;	
 }
 
 

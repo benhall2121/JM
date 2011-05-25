@@ -17,14 +17,23 @@ function poll_vote(){
  
 }
 
-function share(commentary_id, commentary_title, current_user_name, current_user_id){
-	
+function share(commentary_id, commentary_title, current_user_name, current_user_id, to_where){
+	alert(to_where);
+	if(to_where == undefined || to_where == ""){
+	 to_where = "facebook";
+	}
 	//var url = 'http://www.facebook.com/sharer.php?u=http://localhost:3000'
 	var domain = document.domain;
 	
-	if(domain == "localhost"){ domain = "localhost:3000"; }
+	if(domain == "localhost"){ domain = "http://localhost:3000"; }
 	
-	var url = "http://www.facebook.com/sharer.php?u=http://" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
+	if (to_where == "twitter"){
+	  var url = "http://twitter.com/share?status=Checkout this link " + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
+	  //var url = "http://twitter.com/share?status=Currently reading http://www.test.com/post-url"
+	} else {
+	  var url = "http://www.facebook.com/sharer.php?u=http://" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
+	}
+	alert(url);
 	
 	window.open(encodeURI(url));
 	
@@ -43,4 +52,17 @@ function create_unique_id(commentary_id, current_user_id){
   var unique_id = 'v='+version+'$com='+com_id+'$cu='+cu_id
   
   return unique_id;
+}
+
+function clear_add_content(){
+ $('#scraper_input_id').val('');	
+ $('#site_title').html('');
+ $('#site_link').html('');
+ $('#site_desc').html('');
+ $('#preview').hide('fast');
+ 
+ $('#save_preview div.link_shareable').html('');
+ $('#save_preview div.commentary_links_fp').html('');
+ $('#save_preview div.fb_tw_fp').html('');
+ $('#save_preview').hide('fast');
 }

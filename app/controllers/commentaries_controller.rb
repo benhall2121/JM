@@ -1,3 +1,6 @@
+require 'net/http'
+require 'uri'
+
 class CommentariesController < ApplicationController
   #	before_filter :require_user, :only => [:new, :edit]
 	
@@ -25,7 +28,7 @@ class CommentariesController < ApplicationController
   # GET /commentaries/1
   # GET /commentaries/1.xml
   def show
-  	  
+  	  puts "commentary show"
     if params[:unique_id]
       strs = params[:unique_id]
       @quesy_hash={}
@@ -77,16 +80,25 @@ class CommentariesController < ApplicationController
   # POST /commentaries
   # POST /commentaries.xml
   def create
-    @commentary = Commentary.new(params[:commentary])
-    @commentary.user = current_user
+    if !Commentary.find_by_links(params[:commentary][:links])
+     @commentary = Commentary.new(params[:commentary])
+     @commentary.user = current_user
+     @commentary.save
+     @saved = true
+    else
+      @commentary = Commentary.find_by_links(params[:commentary][:links])    
+      @saved = false 	    
+    end
 
     respond_to do |format|
-      if @commentary.save
+     if @saved
         format.html { redirect_to(@commentary, :notice => 'Commentary was successfully created.') }
         format.xml  { render :xml => @commentary, :status => :created, :location => @commentary }
+        format.js { render(:partial => "shared/commentary_link", :locals => {:u => @commentary} )}
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @commentary.errors, :status => :unprocessable_entity }
+        format.js { render(:partial => "shared/not_saved_commentary_link", :locals => {:u => @commentary} )}
       end
     end
   end
@@ -125,4 +137,89 @@ class CommentariesController < ApplicationController
     end
     render :nothing => true  
   end
+  
+  
+  
+  
+  def get_link_info
+     url = params[:link_address]
+    return if url.nil? || url.empty?
+    
+    if !(url[0,7] == "http://" || url[0,8] == "https://")
+      if url[0,4] != "www."
+        url = "http://www." + url
+      else
+        url = "http://" + url
+      end
+    end
+    
+    resp = Net::HTTP.get_response(URI.parse(url))
+    resp_text = resp.body
+    
+    title = resp_text.scan(/<title>\s*(.*.\s*.*)\s*<\/title>/i).to_s
+    desc = resp_text.scan(/<meta name=\"description\" content=\"\s*(.*)\s*\"/i).to_s
+    images = resp_text.scan(/<img [^>]*>/i)
+    
+    root = parse_page_root(url)
+    site_images = handle_images(root, images)
+    
+    link_update = Hash.new
+    link_update = {:site_title => title, :site_desc => desc, :site_images => site_images, :site_link => url}
+    
+    respond_to do |format|
+      format.js { render(:partial => "shared/get_link_info", :locals => {:u => link_update})}
+    end
+    
+   end
+   
+  def handle_images(root, images)
+    if !images.nil?
+    
+    completed_urls = ""
+    src = ""
+    
+      images.each { |i|
+        slash=""
+        # Make sure all single quotes are replaced with double quotes.
+        # Since we aren't rendering javascript we don't really care
+        # if this breaks something.
+        i.gsub!("'", "\"")   
+        # Grab everything between src=" and ".
+        src = i.scan(/src=[\"\']([^\"\']+)/).to_s
+        #if the src has two // do not use the image. YouTube has // for a lot of little gifs
+        if src[0,2] == "//" || src[0,2] == "__"
+          next
+        end
+        
+        # If the src is empty move on.
+        next if src.nil? || src.empty?
+        # If we don't have an absolute path already, let's make one.     
+        if !root.nil? && src[0,4] != "http"
+          if src[0,1] != "/"
+            slash = "/"
+          end
+          src = root + slash + src
+        end
+        
+        if completed_urls == ""
+          completed_urls = src
+        else
+          completed_urls = completed_urls + "," + src
+        end
+      }
+
+        return completed_urls  
+    end
+  end
+  
+  def parse_page_root(url)
+    end_slash = url.rindex("/")
+    if end_slash > 8
+      url[0, url.rindex("/")]
+    else
+      url
+    end
+  end
+  
+  
 end

@@ -1,63 +1,120 @@
 <div class="mainOverview">
 <div class="mainOverview-left-coulmn">
-<div class="show_page_header_titles">Today's Tasks</div>
 
-<ul class="ttul">
-  <% if !taken_todays_poll %>
-    <div id="ttp">
-    <%= image_tag('/images/unchecked.png', :class=> "home_checkbox", :id => "poll_check_box") %>
-    <% else %>
-    <div  id="ttp" class="finishedTodaysTasks">
-    <%= image_tag('/images/checked.png', :class=> "home_checkbox") %>
-    <% end %>
-    Take today's poll to the right</div>
-    
-  <% if commentary_created_today %>
-  	<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Create a commentary item</div>  
-     <% else %>
-     	<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Create a commentary item", new_commentary_path %></div>
-    <% end %>
-  
-  <% if boost_commentary_today %>
-    <div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Boost a commentary item</div>
-     <% else %>
-    <div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Boost a commentary item", commentaries_path %></div>
-    <% end %>
-  
-  <% if share_commentary_today %>
-    <div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Share Something to Facebook</div>
-     <% else %>
-    <div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> <%= link_to "Share Something to Facebook", shareable_commentaries_path %></div>
-    <% end %>
- 
-</ul>
+	<div class="mainOverview-welcome-name">
+	Hello, <%= link_to @user.username, edit_user_path %> (<%= link_to "Logout", :logout %>)
+	</div>
 
-</div>
+	<div class="mainOverview-user-stats">
+	  <div class="level"><span>Level</span> <br /> <span><%= user_level %></span></div>
+  <div class="PageViews"><span>PageViews</span> <br /> <span><%= page_views_count %></span></div>
+	  <div class="Rank"><span>Rank</span> <br /> <span>Rank #</span></div>
+	</div>
+
+	<div class="mainOverview-tasks">
+	<ul>
+	    <div class="show_page_header_titles center_header">Current Challenge</div>
+	    <div class="show_page_header_titles_small center_header">Since May 23, 2011</div>
+	    
+	    <% if current_challenge_complete %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Share two pieces of content to Facebook or Twitter</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Share two pieces of content to Facebook or Twitter</div>
+	    <% end %>
+	</ul>
+	
+	<ul class="ttul">
+	    <div class="show_page_header_titles center_header">Milestones</div>
+	    <% if milestone_share_first_content %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Shared your first Content</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Shared your first Content</div>
+	    <% end %>
+	   
+	    <% if milestone_achieved_first_page_view %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>
+	    <% end %>
+	    
+	    <% if milestone_complete_your_first_challenge %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>
+	    <% end %>
+	    
+	    <% if milestone_achieved_10th_page_view %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>
+	    <% end %>
+	    
+	    <% if milestone_achieved_100th_page_view %>
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>  
+	     <% else %>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>
+	    <% end %>
+	 
+	</ul>
+	</div>
+	
+	</div>
+
 
 <div class="mainOverview-right-coulmn">
 
 <div class="mainOverview-right-coulmn-top">
- <div class="show_page_header_titles">Today's Poll</div>
- 
- <div class="form_row" id="poll_div">
- <% if !taken_todays_poll %>
-    <label for="poll">Which Answer do you like the most?</label><br />
-    <% [ 'Option 1', 'Option 2', 'Option 3', 'Option 4'].each do |poll| %>
-      <br><%= radio_button_tag 'poll', poll %>
-      <%= poll.humanize %>
-    <% end %>
- <div class="poll_button_div"><%= link_to_function 'Vote','poll_vote()',:id => 'poll_button', :class => 'shaded_button' %></div>
- <% else %>
- <br />
- Thank you for taking today's poll
- <% end %>
- </div>
- 
- 
+        <div class='scraperFields'>
+                <div class="show_page_header_titles">Add Content</div>
+	        <div id="scraper_input_div">
+		        <input type="text" class="text_field" id="scraper_input_id" placeholder="Enter URL" />
+		</div>
+		<div id="check" style="display:none;">
+			<img src='/images/redbutton-check48.png' id="check" height="16px" >
+		</div>
+		<div id="loader" style="display:none;">
+			<img src='/images/loader.gif' id="loader" height="16px" >
+		</div>
+	</div>
+        
+	<div id="preview" class="preview" style="display:none">
+	
+		<div id="attach-web-link-form-left_col" class="attach-web-link-form-left_col">
+			<div id="imageSlide">
+			<!-- <img name='im' id='im' width='150px' /> -->
+			</div>
+		</div>
+							
+		<div id="attach-web-link-form-right_col" class="attach-web-link-form-right_col">
+			<div id="site_title" class="site_title"></div>
+			<div id="site_link" class="site_link" style="display:none"></div>
+			<div id="site_desc" class="site_desc" style="display:none"></div>
+			
+			<div class="save_button">
+			<div class="submit_link_button_div"><%= link_to_function 'Submit', "check_if_valid()", :class => 'shaded_button' %></div>
+			</div>
+		</div>
+	</div>
+	<div id="save_preview" class="save_preview" style="display:none">
+	  <div class="link_shareable"></div>
+	  <div class="link_share_me">
+	    <div class="commentary_links_fp"></div>
+	    <div class="fb_tw_fp"></div>
+	    <div class="add_new_button">
+		<div class="add_new_button_div"><%= link_to_function '+ Add New', "clear_add_content()", :class => 'shaded_button' %></div>
+	    </div>
+	  </div>
+	</div>
 </div>
 
 <div class="mainOverview-right-coulmn-bottom">
- <div class="show_page_header_titles">Content Preview</div>
+ <div class="small_link"><%= link_to "See More", shareable_commentaries_path %></div>
+ <div class="show_page_header_titles">Browse and Share content</div>
+ 
+ <div class="all_commentary">
+ <%= render :partial => "commentaries/frontpage_shareable_commentary"  %>
+ </div>
+ 
 </div>
 
 </div>

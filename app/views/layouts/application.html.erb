@@ -4,10 +4,10 @@
   <title>JM</title>
   <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery', 'application', 'webScraper' %>
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css" %>
-  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
+  <%#= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
 
 <script type="text/javascript">
 
@@ -29,28 +29,28 @@
 
 <div class="all">
   <div class="header">
-   <% if !(params[:controller] == 'users' && params[:action] == 'index') %>
     <div id="firstNav">
       <% if logged_in? %>
-        <div id="history_count" class="history_count"><%= link_to current_user.histories.count, histories_path() %></div> 
-    	<div class="home_header"><%= link_to "Home", user_path(current_user.id) %></div> 
+        <div id="history_count" class="history_count"><%= link_to (user_level.to_s + ' / ' + page_views_count.to_s + ' / Rank #') , histories_path() %></div>
+    	<div class="about_header"><%= link_to "Home", user_path(current_user.id) %> | <%= link_to "Account", edit_user_path(current_user.id) %> | <%= link_to "Logout", :logout %> | <%= link_to "About", page_path(1) %></div>
+      <% else %>
+      <%=  render :partial => 'user_sessions/form' %>
       <% end %>   
-    	<div class="about_header"><%= link_to "About", page_path(1) %></div>
     </div>
-    <% if current_user %>
+   <!-- <% if current_user %>
     <div id="secondNav">
         <%= link_to(new_commentary_path) do %><div class="secondNavButton">Create</div><% end %>
     	<%= link_to(commentaries_path) do %><div class="secondNavButton">Boost</div><% end %>
     	<%= link_to(shareable_commentaries_path) do %><div class="secondNavButton">Share</div><% end %>
     </div>
-    
-    <% end %>
-   <% end %>
+    <% end %> 
+    -->
   </div>
 
 <%= yield %>
 </div>
 
+<!--
 <% if !(params[:controller] == 'users' && params[:action] == 'index') %>
 <div class="footer">
     <% if current_user %>
@@ -63,6 +63,7 @@
    <% end %>
 </div>
 <% end %>
+-->
 
 </body>
 </html>

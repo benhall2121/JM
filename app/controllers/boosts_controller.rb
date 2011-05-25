@@ -18,7 +18,7 @@ class BoostsController < ApplicationController
   end
   
   def destroy
-    @boost = Boost.find_by_user_id_and_commentary_id(current_user.id, params[:id])
+  	  @boost = Boost.find_by_user_id_and_commentary_id(current_user.id, params[:commentaries_id])
     @boost.destroy
     flash[:notice] = "Your Boost has been destroyed!"
     redirect_to commentaries_path

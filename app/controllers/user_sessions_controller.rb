@@ -18,7 +18,7 @@ class UserSessionsController < ApplicationController
 
     respond_to do |format|
       if @user_session.save
-      	      @user = User.find_by_username(@user_session.username)
+      	@user = User.find_by_username(@user_session.username)
       	format.html { redirect_to(@user, :notice => 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
@@ -35,7 +35,7 @@ class UserSessionsController < ApplicationController
     @user_session.destroy
 
     respond_to do |format|
-      format.html { redirect_to(:users, :notice => 'Goodbye!') }
+      format.html { redirect_to root_path}
       format.xml  { head :ok }
     end
   end

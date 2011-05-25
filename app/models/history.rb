@@ -5,7 +5,7 @@ class History < ActiveRecord::Base
   
   def self.create_history(params)
     history = History.find_by_history_type_and_history_id_and_user_id(params[:history_type], params[:history_id], params[:user_id])
-    if history && params[:history_type] != 'Poll Taken' && params[:history_type] != 'Shared Commentary Link'
+    if history && params[:history_type] != 'Poll Taken' && params[:history_type] != 'Shared Commentary Link' && params[:history_type] != 'Milestone'
       history.datetime = params[:datetime]
       history.save!
     elsif params[:history_type] == 'Shared Commentary Link'
@@ -15,7 +15,12 @@ class History < ActiveRecord::Base
     	  shared_history.save!
   	else
   	  History.new(params).save!  
-    	end	
+    	end
+    elsif params[:history_type] == 'Milestone'
+    	milestone_history = History.find_by_history_type_and_user_id_and_milestone_type(params[:history_type], params[:user_id], params[:milestone_type])
+    	if !milestone_history
+    	  History.new(params).save!
+        end
     else
       History.new(params).save!
     end

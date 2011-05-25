@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518171120) do
+ActiveRecord::Schema.define(:version => 20110524094320) do
 
   create_table "boosts", :force => true do |t|
     t.integer  "user_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20110518171120) do
     t.datetime "datetime"
     t.string   "ipaddress"
     t.string   "HttpReferrer"
+    t.string   "milestone_type"
   end
 
   create_table "pages", :force => true do |t|

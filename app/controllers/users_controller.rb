@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     if current_user
       redirect_to :action => 'show', :id => current_user.id
     else
+    @user_session = UserSession.new
     @users = User.all
 
     respond_to do |format|
@@ -19,6 +20,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    #boost = Boost.where("user_id=(?)", current_user).map(&:commentary_id)
+    boost = Boost.find(:all, :order => 'created_at desc').map(&:commentary_id)
+    @commentaries = Commentary.find(:all, :limit => 10, :conditions => ["id in (?)", boost], :order => 'created_at desc')
+
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -28,6 +34,11 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
+    if current_user	 
+      redirect_to user_path(current_user)	    
+      return
+    end	   
+    @user_session = UserSession.new
     @user = User.new
 
     respond_to do |format|
