@@ -16,8 +16,21 @@ class CommentariesController < ApplicationController
   end
   
   def shareable
-    boost = Boost.where("user_id=(?)", current_user).map(&:commentary_id)
-    @commentaries = Commentary.find(:all, :conditions => ["user_id=(?) OR id in (?)", current_user, boost], :order => 'created_at desc')
+  	
+   boost = Boost.find(:all).map(&:commentary_id)
+      if params[:boost] && current_user.admin?
+   	#Commentaries that have NOT been boosted
+  	conditions = ["id NOT in (?)", boost]
+      elsif !params[:user_id].nil? && !params[:pending]
+  	#Commentaries for the current user that have been boosted
+  	conditions =  ["user_id=(?) AND id in (?)", current_user, boost]
+      elsif !params[:user_id].nil? && params[:pending]
+  	#Commentaries for the current user that have NOT been boosted
+  	conditions = ["user_id=(?) AND id NOT in (?)", current_user, boost]
+      else
+        conditions = ["id in (?)", boost]
+      end
+    @commentaries = Commentary.find(:all, :conditions => conditions, :order => 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb

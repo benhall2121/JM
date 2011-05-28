@@ -60,6 +60,14 @@ module ApplicationHelper
     return History.find(:all, :conditions => ['user_id = (?) AND history_type = (?)', current_user.id, 'Milestone']).count	  
   end
   
+  def rank_of_user
+    user_level = History.find(:all, :select => 'user_id, count(*) as level', :conditions => ['history_type = (?)', 'Milestone'], :group => 'user_id', :order => 'level desc' )
+    page_views = History.find(:all, :include => @user_level, :select => 'user_id, count(*) as pageViews', :conditions => ['history_type = (?)', 'Shared Commentary Link'], :group => 'user_id', :order => 'pageViews desc' )
+    
+    return '21'  
+  end
+  
+  
   def milestone_share_first_content
     sc = shared_commentary_count_one_or_more
     #Milestone Share your first content
@@ -106,6 +114,10 @@ module ApplicationHelper
   
   def logged_in?
     !!current_user
+  end
+  
+  def is_admin?
+    return current_user.admin?	  
   end
 	
 end

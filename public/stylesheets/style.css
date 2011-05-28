@@ -294,8 +294,9 @@ a:hover{
  text-align:right;
 }
 
-.boost_button_div {
- margin: 0 0 7px 0;	
+.boost_button_div, .spacer_div {
+ margin: 0 0 3px 0;	
+ height:19px;
 }
 
 .shaded_button{
@@ -335,10 +336,10 @@ a:hover{
 }
 
 .commentary_wrapper{
- height: 100%;
+ height: 110%;
  width:47%;
  display:inline-block;
- margin: 15px 0 0 0;
+ margin: 10px 0 0 0;
 }
 
 .commentary_whole{

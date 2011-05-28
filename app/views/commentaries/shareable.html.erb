@@ -1,6 +1,5 @@
-<p class="section_desription">A Brief Shareable Description of what to do. A Brief Description of what to do. A Brief Description of what to do. A Brief Description of what to do. A Brief Description of what to do. A Brief Description of what to do.</p>
-
-<h1>Shareable Commentaries</h1>
+<%= link_to 'All Content', shareable_commentaries_path() %> | <%= link_to 'My Content', shareable_commentaries_path(:user_id => current_user) %> | <%= link_to 'Pending', shareable_commentaries_path(:user_id => current_user, :pending => true) %> <% if is_admin? %>| <%= link_to 'Boost Content', shareable_commentaries_path(:boost => true) %><% end %>
+<h1>Browse and Share Content</h1>
 <div class="all_commentary">
 <%= render 'show_shareable_commentary' %>
 </div>

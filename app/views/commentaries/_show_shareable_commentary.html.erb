@@ -1,6 +1,15 @@
 
 <% @commentaries.each do |commentary| %>
-<div class="commentary_wrapper left_column">
+<div class="commentary_wrapper left_column" >
+<% if is_admin? %>
+  <div class="commentary_boost">
+    <% if !commentary.boosts.exists? %>
+      <div class="boost_button_div"><%= link_to 'Boost', create_boost_path(:commentaries_id => commentary), :method => :post, :class => 'shaded_button' %></div>
+    <% else %>
+      <div class="boost_button_div"><%= link_to 'Boosted', destroy_boost_path(:commentaries_id => commentary), :confirm => 'Are you sure?', :class => 'shaded_button' %></div>
+    <% end %>
+  </div>
+<% end %>
 <div class="commentary_whole">
     <div class="commentary_title"><%= User.find(commentary.user_id).username %> ~ <%= link_to commentary.title, commentary %></div>
     <div class="commentary_links"><%= link_to commentary.links, commentary.links, :target => 'blank', :class => 'c-links' %></div>
@@ -10,9 +19,14 @@
 </div>
 
 <div class="commentary_wrapper right_column">
+<% if is_admin? %>
+  <div class="spacer_div"></div>
+<% end %>
 <div class="commentary_whole share_link">
+<% if commentary.boosts.exists? %>
  <%= link_to_function image_tag('/images/squareFaceBookIcon32.png', :class => 'share_link_image'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
  <%= link_to_function image_tag('/images/twitter32.png', :class => 'share_link_image'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
+<% end %>
 </div>
 
 </div>
