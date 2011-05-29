@@ -175,6 +175,8 @@ class CommentariesController < ApplicationController
     root = parse_page_root(url)
     site_images = handle_images(root, images)
     
+    title = url if title.blank?
+    
     link_update = Hash.new
     link_update = {:site_title => title, :site_desc => desc, :site_images => site_images, :site_link => url}
     
