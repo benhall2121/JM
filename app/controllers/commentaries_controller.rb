@@ -41,13 +41,12 @@ class CommentariesController < ApplicationController
   # GET /commentaries/1
   # GET /commentaries/1.xml
   def show
-  	  puts "commentary show"
     if params[:unique_id]
       strs = params[:unique_id]
       @quesy_hash={}
       
       for str in strs.split("$")
-	s= str.split("=")
+	s= str.split("#")
 	@quesy_hash[s[0]]= s[1]
       end
       

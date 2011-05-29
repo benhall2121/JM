@@ -42,7 +42,7 @@ div.field, div.actions {
   margin:5px 0 0 0;	
 }
 
-a:hover{
+a:hover, .c-links:hover{
  color:#B4B4B4;	
 }
 
@@ -466,5 +466,63 @@ ul.hist_type_header li{
 .add_new_button{
  text-align:right;	
 }
+
+.about_nav{
+ border-bottom: 1px solid #B0B0B0;
+ padding: 3px;
+ width:95%;
+ margin-left:auto;
+ margin-right:auto;
+}
+
+.about_nav a{
+ padding:5px;	
+}
+
+.about_sections_main_div{
+ width:95%;
+ margin-left:auto;
+ margin-right:auto;
+ padding:7px 3px 3px 3px;
+}
+
+.about_sections_header{
+ font-weight:bold;
+ font-size:18px;
+ padding:5px 0 5px 0;
+}
+
+.questions_wrapper{
+}
+
+.questions_wrapper div{
+ display:inline-block; 
+}
+
+.questions{
+}
+
+div.about_admin_div, span.new_site_guide_faq{
+ font-size:10px; 
+ padding-left:5px; 
+}
+
+div.about_admin_div a, span.new_site_guide_faq{
+ padding-left:3px;	
+}
+
+span.new_site_guide_faq{
+ font-weight:normal;	
+}
+ 
+.questions:hover{
+ cursor: pointer;
+}
+
+.answers{
+ padding:10px 0 10px 0;
+ font-size:14px;
+}
+
 
 

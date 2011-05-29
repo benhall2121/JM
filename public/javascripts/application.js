@@ -1,6 +1,12 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+$(document).ready(function() {
+	$('.questions').click(function() {
+	  $(this).parent().nextAll('.answers').slideToggle('fast');	
+	});
+ });
+
 function poll_vote(){
   $.post('/history/poll_taken', { "poll_id":  $('input[name=poll]:checked').val() }, function(response) {
   // your js code that inserts data into the page
@@ -28,10 +34,10 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	if(domain == "localhost"){ domain = "http://localhost:3000"; }
 	
 	if (to_where == "twitter"){
-	  var url = "http://twitter.com/share?status=Checkout this link " + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
+	  var url = "http://twitter.com/share?text=I am currently reading:&url=" + domain + "/shared_commentary/" + current_user_name + "/" + create_unique_id(commentary_id, current_user_id);
 	  //var url = "http://twitter.com/share?status=Currently reading http://www.test.com/post-url"
 	} else {
-	  var url = "http://www.facebook.com/sharer.php?u=http://" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + '/' + create_unique_id(commentary_id, current_user_id);
+	  var url = "http://www.facebook.com/sharer.php?u=" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + "/" + create_unique_id(commentary_id, current_user_id);
 	}
 	
 	window.open(encodeURI(url));
@@ -48,7 +54,7 @@ function create_unique_id(commentary_id, current_user_id){
   var version = '1';
   var com_id = Math.pow(2,commentary_id);
   var cu_id = Math.pow(3,current_user_id);
-  var unique_id = 'v='+version+'$com='+com_id+'$cu='+cu_id
+  var unique_id = 'v#'+version+'$com#'+com_id+'$cu#'+cu_id
   
   return unique_id;
 }

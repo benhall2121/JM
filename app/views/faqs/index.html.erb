@@ -1,0 +1,14 @@
+<%= render 'shared/about_nav' %>
+<div class="about_sections_main_div">
+<div class="about_sections_header">Table Of <% if is_admin? %><span class="new_site_guide_faq"><%= link_to 'New FAQ', new_faq_path %></span><% end %></div>
+
+<% @faqs.each do |faq| %>
+  <div class="questions_and_answers">
+    <div class="questions_wrapper">
+      <div class="questions c-links"><%= faq.question %></div>
+      <% if is_admin? %><div class="about_admin_div"><%= link_to 'Edit', edit_faq_path(faq) %> <%= link_to 'Delete', faq, :confirm => 'Are you sure?', :method => :delete %></div><% end %>
+    </div>
+    <div class="answers" style="display:none"><%= faq.answer %></div>
+  </div>
+<% end %>
+</div>

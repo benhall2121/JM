@@ -1,5 +1,9 @@
 Jm::Application.routes.draw do
   
+  resources :site_guides
+
+  resources :faqs
+
   resources :pages
   
   resources :histories

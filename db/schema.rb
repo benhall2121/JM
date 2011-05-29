@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527215043) do
+ActiveRecord::Schema.define(:version => 20110529070622) do
 
   create_table "boosts", :force => true do |t|
     t.integer  "user_id"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(:version => 20110527215043) do
     t.string   "links"
     t.text     "body"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "faqs", :force => true do |t|
+    t.string   "question"
+    t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,6 +51,13 @@ ActiveRecord::Schema.define(:version => 20110527215043) do
     t.string   "name"
     t.string   "permalink"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "site_guides", :force => true do |t|
+    t.string   "question"
+    t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

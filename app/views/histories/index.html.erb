@@ -7,9 +7,13 @@
       <% if hist_type == 'Poll Taken' %>
          <li><%= hist_type %></li>
       <% elsif hist_type == 'Create Commentary' %>
-         <li>Created Commentary</li>
+       <% hist.each do |cc| %>
+         <li>Created Commentary, <%= link_to truncate(Commentary.find_by_id(cc.history_id).title, :length => 55), commentary_path(cc.history_id), :class => 'c-links' if Commentary.find_by_id(cc.history_id) %></li>
+         <% end %>
       <% elsif hist_type == 'Boost Commentary' %>
-         <li>Boosted Commentary</li>
+       <% hist.each do |bc| %>
+         <li>Boosted Commentary, <%= link_to truncate(Commentary.find_by_id(bc.history_id).title, :length => 55), commentary_path(bc.history_id), :class => 'c-links' if Commentary.find_by_id(bc.history_id) %></li>
+         <% end %>
       <% elsif hist_type == 'Share Commentary' %>
        <% hist.each do |sc| %>
          <li>Shared: Content to Facebook, <%= link_to truncate(Commentary.find_by_id(sc.history_id).title, :length => 55), commentary_path(sc.history_id), :class => 'c-links' if Commentary.find_by_id(sc.history_id) %></li>

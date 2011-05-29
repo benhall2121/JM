@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @site_guide.question %>
+</p>
+
+<p>
+  <b>Answer:</b>
+  <%= @site_guide.answer %>
+</p>
+
+
+<%= link_to 'Edit', edit_site_guide_path(@site_guide) %> |
+<%= link_to 'Back', site_guides_path %>

@@ -1,0 +1,14 @@
+<%= render 'shared/about_nav' %>
+<div class="about_sections_main_div">
+<div class="about_sections_header">Table Of <% if is_admin? %><span class="new_site_guide_faq"><%= link_to 'New Site guide', new_site_guide_path %></span><% end %></div>
+
+<% @site_guides.each do |site_guide| %>
+  <div class="questions_and_answers">
+    <div class="questions_wrapper">
+      <div class="questions c-links"><%= site_guide.question %></div>
+      <% if is_admin? %><div class="about_admin_div"><%= link_to 'Edit', edit_site_guide_path(site_guide) %> <%= link_to 'Delete', site_guide, :confirm => 'Are you sure?', :method => :delete %></div><% end %>
+    </div>
+    <div class="answers" style="display:none"><%= site_guide.answer %></div>
+  </div>
+<% end %>
+</div>
