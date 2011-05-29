@@ -1,26 +1,32 @@
 <div class="histories_overview">
   <% @histories.group_by(&:group_by_created_at).each do |created_at, histories| %>
   <div class="history_date_header"><%= created_at %></div>
+  <ul class="hist_type_header">
    <% histories.group_by(&:group_by_history_type).sort.each do |hist_type, hist| %>
     
-    <div class="hist_type_header">+<%= hist.count %> 
-    
       <% if hist_type == 'Poll Taken' %>
-       <%= hist_type %>
+         <li><%= hist_type %></li>
       <% elsif hist_type == 'Create Commentary' %>
-       Created Commentary
+         <li>Created Commentary</li>
       <% elsif hist_type == 'Boost Commentary' %>
-       Boosted Commentary
+         <li>Boosted Commentary</li>
       <% elsif hist_type == 'Share Commentary' %>
-       Shared Commentary to Facebook
+       <% hist.each do |sc| %>
+         <li>Shared: Content to Facebook, <%= link_to truncate(Commentary.find_by_id(sc.history_id).title, :length => 55), commentary_path(sc.history_id), :class => 'c-links' if Commentary.find_by_id(sc.history_id) %></li>
+       <% end %>
       <% elsif hist_type == 'Shared Commentary Link' %>
-       Shared Commentary Link Clicked
+       <% hist.group_by(&:group_by_history_id).sort.each do |hist_id, h| %>
+         <li>PageViews : <%= h.count %> for <%= link_to Commentary.find_by_id(hist_id).title, commentary_path(hist_id), :class => 'c-links' if Commentary.find_by_id(hist_id)  %></li>
+       <% end %>
+      <% elsif hist_type == 'Milestone' %>
+       <% hist.each do |m| %> 
+         <li>Milestone: <%= m.milestone_type %></li>
+         <% end %>  
       <% else %>
-       <%= hist_type %>
+         <li><%= hist_type %></li>
       <% end %>
-    
-    </div>
 
    <% end %>
+   </ul>
   <% end %>
 </div>

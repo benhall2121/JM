@@ -39,4 +39,12 @@ class History < ActiveRecord::Base
   def group_by_history_type
     self.history_type
   end
+  
+  def group_by_history_id
+    self.history_id
+  end
+  
+  def group_by_milestone_type
+  	  self.milestone_type
+  end
 end
