@@ -29,9 +29,9 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	 to_where = "facebook";
 	}
 	//var url = 'http://www.facebook.com/sharer.php?u=http://localhost:3000'
-	var domain = document.domain;
+	var domain = 'http://' + document.domain;
 	
-	if(domain == "localhost"){ domain = "http://localhost:3000"; }
+	if(domain == "http://localhost"){ domain = "localhost:3000"; }
 	
 	if (to_where == "twitter"){
 	  var url = "http://twitter.com/share?text=I am currently reading:&url=" + domain + "/shared_commentary/" + current_user_name + "/" + create_unique_id(commentary_id, current_user_id);
