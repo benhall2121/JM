@@ -31,7 +31,7 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	//var url = 'http://www.facebook.com/sharer.php?u=http://localhost:3000'
 	var domain = 'http://' + document.domain;
 	
-	if(domain == "http://localhost"){ domain = "localhost:3000"; }
+	if(domain == "http://localhost"){ domain = "http://localhost:3000"; }
 	
 	if (to_where == "twitter"){
 	  var url = "http://twitter.com/share?text=I am currently reading:&url=" + domain + "/shared_commentary/" + current_user_name + "/" + create_unique_id(commentary_id, current_user_id);
@@ -70,4 +70,6 @@ function clear_add_content(){
  $('#save_preview div.commentary_links_fp').html('');
  $('#save_preview div.fb_tw_fp').html('');
  $('#save_preview').hide('fast');
+ 
+ $("img#check").hide();
 }

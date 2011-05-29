@@ -13,8 +13,6 @@ jQuery.ajaxSetup({
 $(document).ready(function(){
    
    $("#scraper_input_id").keyup(function(inputValue) {
-	    $("#loader").fadeIn('fast');
-		
 		scrap_input = $("#scraper_input_id").val();
 		
 		if(scrap_input == old_url){ return; }
@@ -23,14 +21,16 @@ $(document).ready(function(){
 		$('#preview').hide('fast');
 		
 		//Hide the check box if the url is blank
-		if(scrap_input != ''){ $("#check").fadeIn('fast'); } else { $("#check").fadeOut('fast'); }
+		if(scrap_input != ''){ $("#check").show(); } else { $("#check").hide(); }
 		
 		//Make the check box red if there is an invalid url
 		if(!isUrl(scrap_input)){
 			$("img#check").attr('src','/images/redbutton-check48.png');
+			$("#loader").hide('fast');
 			return;
 		} else {
 			$("img#check").attr('src','/images/greenbutton-check48.png');
+			$("#loader").show('fast');
 		}
 		
 		if(!scrap_input.match(/^(http)/i)) {
@@ -40,7 +40,6 @@ $(document).ready(function(){
 		$.post("/commentaries/get_link_info", "link_address=" + scrap_input, null, "script");
 		
 		//reset_link_input();
-		$("#preview").show('fast');
 	 return false;
   })
 })
