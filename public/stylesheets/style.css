@@ -6,7 +6,7 @@ body { color:#282828;
       background-color:#F38119;
        background-image:url('../images/corner_sun.png');
        background-repeat:no-repeat;
-      /* background-size: 70%; */
+       background-size: 80%; 
        background-position:right;
 }
 
