@@ -31,7 +31,7 @@ Jm::Application.routes.draw do
   match '/commentaries/get_link_info' => 'commentaries#get_link_info'
   match '/commentaries/create' => 'commentaries#create'
   
-  match '/shared_commentary/:shared_user_username/:commentary_title/:unique_id' => 'commentaries#show'
+  match '/shared_commentary/:shared_user_username/:unique_id/:commentary_title' => 'commentaries#show'
  
   # The priority is based upon order of creation:
   # first created -> highest priority.
