@@ -59,19 +59,10 @@ class CommentariesController < ApplicationController
       commentary_id = Math::log(com).div(Math::log(2))
       user_shared = Math::log(cu).div(Math::log(3))
       
-      puts "current_user.id"
-      puts current_user.id if current_user
-      puts "user_shared"
-      puts user_shared
-      
       @user_session = UserSession.new if @user_session.nil?
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
       if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.current > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 10.seconds))
-      puts "coming from"
-      puts coming_from
-      puts "coming_from_ip_address"
-      puts coming_from_ip_address
        History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
       end
       
