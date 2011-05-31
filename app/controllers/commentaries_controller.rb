@@ -70,10 +70,16 @@ class CommentariesController < ApplicationController
     end
     @commentary = Commentary.find(params[:id])
 
+   if params[:unique_id] && @commentary.links
+     redirect_to(@commentary.links)
+   else 
     respond_to do |format|
+     
+     	     puts "222"
       format.html # show.html.erb
       format.xml  { render :xml => @commentary }
     end
+   end
   end
   
   # GET /commentaries/new
