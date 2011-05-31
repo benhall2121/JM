@@ -39,7 +39,8 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	} else {
 	  var url = "http://www.facebook.com/sharer.php?u=" + domain + "/shared_commentary/" + current_user_name + "/" + commentary_title + "/" + create_unique_id(commentary_id, current_user_id);
 	}
-	
+	alert(url);
+	return;
 	window.open(encodeURI(url));
 	
 	$.post('/commentaries/share_commentary', { "commentary_id": commentary_id }, function(response) {
