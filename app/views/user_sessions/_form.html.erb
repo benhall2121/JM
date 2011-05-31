@@ -1,3 +1,4 @@
+<div class="login-div">
 <%= form_for(@user_session) do |f| %>
   <% if @user_session.errors.any? %>
     <div id="error_explanation">
@@ -10,16 +11,15 @@
       </ul>
     </div>
   <% end %>
-
+  <div>
   <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, :class => 'text_field', :placeholder => 'Username' %>
   </div>
   <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :class => 'text_field', :placeholder => 'password' %>
   </div>
   <div class="actions">
-    <%= f.submit :Login %>
+    <%= f.submit :Login, :class => 'shaded_button', :style => "background-color:white;" %>
   </div>
 <% end %>
+</div>

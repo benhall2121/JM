@@ -12,20 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, :class => 'text_field', :placeholder => 'Username' %>
   </div>
   <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :class => 'text_field', :placeholder => 'Email' %>
   </div>
   <div class="field">
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :class => 'text_field', :placeholder => 'Password' %>
   </div>
   <div class="field">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
+      <%= f.password_field :password_confirmation, :class => 'text_field', :placeholder => 'Password Confirmation' %>
     </div>
   <div class="actions">
     <%= f.submit "Register", :class => 'shaded_button', :style => "background-color:white;" %>
