@@ -54,16 +54,25 @@ class CommentariesController < ApplicationController
       com = @quesy_hash['com'] # com is the commentary_id. com = 2 to the power of the original commentary_id. The inverse of this is log(@quesy_hash['com'])/log(2)
       cu = @quesy_hash['cu'] # cu is the current_user_id. The current_user_id is the user who shared the commentary. cu = 3 to the power of the original current_user_id. The inverse of this is log(@quesy_hash['cu'])/log(3)
       coming_from = request.env['HTTP_REFERER']
+      coming_from_ip_address = request.env['REMOTE_ADDR']
       
       commentary_id = Math::log(com).div(Math::log(2))
       user_shared = Math::log(cu).div(Math::log(3))
+      
+      puts "current_user.id"
+      puts current_user.id if current_user
+      puts "user_shared"
+      puts user_shared
       
       @user_session = UserSession.new if @user_session.nil?
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
       if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.current > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 10.seconds))
-      puts "in share"
-       History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => request.env['REMOTE_ADDR'], :HttpReferrer => request.env['HTTP_REFERER'] )
+      puts "coming from"
+      puts coming_from
+      puts "coming_from_ip_address"
+      puts coming_from_ip_address
+       History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
       end
       
       params[:id] = commentary_id
