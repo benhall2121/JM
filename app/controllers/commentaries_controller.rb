@@ -62,7 +62,7 @@ class CommentariesController < ApplicationController
       @user_session = UserSession.new if @user_session.nil?
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
-      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.current > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 10.seconds))
+      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.current > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds))
        History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
       end
       
