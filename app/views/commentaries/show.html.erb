@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<meta property="og:title" content="<%= @commentary.title %>"/>
+
 <% if current_user && current_user.id == @commentary.user_id %>
   <%= link_to '(Edit)', edit_commentary_path(@commentary) %> |
   <%= link_to 'Delete', @commentary, :confirm => 'Are you sure?', :method => :delete %>
