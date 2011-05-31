@@ -2,7 +2,12 @@ html {overflow-y: scroll;}
 
 body { color:#282828; 
        font-family: 'Cabin', arial, serif; 
-       background-color: #D98719;
+      /* background-color: #D98719;*/
+      background-color:#F38119;
+       background-image:url('../images/corner_sun.png');
+       background-repeat:no-repeat;
+      /* background-size: 70%; */
+       background-position:right;
 }
 
 a { text-decoration: none; color:#282828; }
