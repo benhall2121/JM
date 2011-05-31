@@ -61,10 +61,23 @@ module ApplicationHelper
   end
   
   def rank_of_user
-    user_level = History.find(:all, :select => 'user_id, count(*) as level', :conditions => ['history_type = (?)', 'Milestone'], :group => 'user_id', :order => 'level desc' )
-    page_views = History.find(:all, :include => @user_level, :select => 'user_id, count(*) as pageViews', :conditions => ['history_type = (?)', 'Shared Commentary Link'], :group => 'user_id', :order => 'pageViews desc' )
+    users = User.find(:all).count
+    ul_pv = History.find_by_sql(["select * from (select user_id, count(*) as level, 0 as pageViews from histories where history_type='Milestone' group by user_id UNION select user_id, 0 as level, count(*) as pageViews from histories where history_type='Shared Commentary Link' group by user_id) as s group by user_id order by level desc, pageViews desc;"])
     
-    return '21'  
+    i = 1
+    rank = 0
+    ul_pv.each do |ulpv|
+      if "#{ulpv['user_id']}" == current_user.id.to_s	    
+      	      rank = i
+      	      p = true
+      	      break
+      end
+      i += 1
+    end
+    
+    rank_percentile = (((users-rank).to_f/users).to_f)*100  
+    
+    return rank_percentile.to_i.to_s + '%'  
   end
   
   
