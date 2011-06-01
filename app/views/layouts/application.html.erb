@@ -31,8 +31,11 @@
   <div class="header">
     <div id="firstNav">
       <% if logged_in? %>
-        <div id="history_count" class="history_count"><%= link_to (user_level.to_s + ' / ' + page_views_count.to_s + ' / ' + rank_of_user.to_s ) , histories_path() %></div>
-    	<div class="about_header"><%= link_to "Home", user_path(current_user.id) %> | <%= link_to "Account", edit_user_path(current_user.id) %> | <%= link_to "Logout", :logout %> | <%= link_to "About", page_path(1) %></div>
+        <div id="history_count" class="history_count"><%= link_to (user_level.to_s + ' / ' + page_views_count.to_s + ' / ' + rank_of_user.to_s ) , histories_path() %>
+        
+	<%= link_to current_user.username, edit_user_path(current_user) %> (<%= link_to "Logout", :logout %>)
+	</div>
+    	<div class="about_header"><%= link_to "Home", user_path(current_user.id) %> | <%= link_to "Account", edit_user_path(current_user.id) %> | <%= link_to "About", page_path(1) %></div>
       <% else %>
       <%=  render :partial => 'user_sessions/form' %>
       <% end %>   

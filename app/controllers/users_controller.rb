@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
     #boost = Boost.where("user_id=(?)", current_user).map(&:commentary_id)
     boost = Boost.find(:all, :order => 'created_at desc').map(&:commentary_id)
-    @commentaries = Commentary.find(:all, :limit => 10, :conditions => ["id in (?)", boost], :order => 'created_at desc')
+    @commentaries = Commentary.find(:all, :limit => 30, :conditions => ["id in (?)", boost], :order => 'created_at desc')
 
     
     respond_to do |format|

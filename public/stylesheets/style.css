@@ -2,12 +2,12 @@ html {overflow-y: scroll;}
 
 body { color:#282828; 
        font-family: 'Cabin', arial, serif; 
-      /* background-color: #D98719;*/
+      /* background-color: #D98719;
       background-color:#F38119;
        background-image:url('../images/corner_sun.png');
        background-repeat:no-repeat;
        background-size: 80%; 
-       background-position:right;
+       background-position:right;*/
 }
 
 a { text-decoration: none; color:#282828; }
@@ -216,18 +216,25 @@ a:hover, .c-links:hover{
 }
 
 .mainOverview-left-coulmn{
-  width:33.5%;
+  width:20%;
   float:left;
+  margin:0px 5px 10px 10px;
+  height:400px;
+}
+
+.mainOverview-right-coulmn{
+  width:77%;
+  float:right;
   margin:0px 10px 10px 5px;
   height:400px;
 }
 
-.mainOverview-welcome-name, .mainOverview-user-stats, .mainOverview-tasks, .mainOverview-right-coulmn-top, .mainOverview-right-coulmn-bottom, .registration_wrapper{
+.mainOverview-welcome-name, .mainOverview-user-stats, .mainOverview-current-tasks, .mainOverview-tasks, .mainOverview-right-coulmn-top, .mainOverview-right-coulmn-bottom, .registration_wrapper{
   padding:7px;
-  border: 2px solid #B0B0B0;
-  box-shadow: 0px 0px 10px #FFCC11;
-  -webkit-box-shadow: 0px 0px 10px #FFCC11;
-  -moz-box-shadow: 0px 0px 10px #FFCC11;
+  border: 1px solid #B0B0B0;
+  box-shadow: 0px 0px 4px #0000CD;
+  -webkit-box-shadow: 0px 0px 4px #0000CD;
+  -moz-box-shadow: 0px 0px 4px #0000CD;
  background-color:#FDFDFD;
 }
 
@@ -244,11 +251,14 @@ a:hover, .c-links:hover{
 
 .mainOverview-user-stats{
   margin-bottom:10px;
+  font-size:12px;
+  padding:3px;
+  text-align:center;
 } 
 
 .mainOverview-user-stats div{
  display:inline-block;
- width: 32%;
+ padding: 0 6px 0 6px;
  text-align:center;
 }
 
@@ -257,9 +267,13 @@ a:hover, .c-links:hover{
  border-right:1px solid black;	
 }
 
-.mainOverview-tasks ul{
+.mainOverview-tasks ul, .mainOverview-current-tasks ul{
   margin:0px;
-  padding:15px;
+  padding:7px;
+}
+
+.mainOverview-current-tasks{
+ margin-bottom:10px;	
 }
 
 .mainOverview-right-coulmn-top{
@@ -275,11 +289,6 @@ a:hover, .c-links:hover{
  text-align:center;
 }
 
-.ttul{
- border-top:1px solid #B0B0B0;	
- padding-top: 5px;
-}
-
 .ttul div{
  padding:5px;	
 }
@@ -287,9 +296,12 @@ a:hover, .c-links:hover{
 .home_checkbox{	
 }
 
-.show_page_header_titles{
+.show_page_header_titles, .show_page_header_titles_large{
  text-align:left;
  font-weight:bold;
+}
+
+.show_page_header_titles_large{	
 }
 
 .center_header{
@@ -301,23 +313,17 @@ a:hover, .c-links:hover{
  padding-bottom:5px
 }
 
-.mainOverview-right-coulmn{
-  width:63%;
-  float:right;
-  margin:0px 10px 10px 5px;
-  height:400px;
-}
-
 .scraperFields div{
   display:inline-block;	
 }
 
 #scraper_input_div{
- margin-left:4px;	
+ margin:0 4px 0 4px;
+ width:80%;
 }
 
 #scraper_input_id {
- width:375px;
+ width:100%;
  height:18px;
 }
 
@@ -381,8 +387,7 @@ a:hover, .c-links:hover{
  display:inline-block;	
  width:95%;
  border-bottom: 1px solid #B0B0B0;
- padding-bottom: 5px;
- padding-top: 5px;
+ padding: 5px 0 5px 0;
  margin-left:auto;
  margin-right:auto;
 }
@@ -392,16 +397,14 @@ a:hover, .c-links:hover{
 }
 
 .commentary_links_fp{
- width: 49%;
- font-size:12px;
- height: 18px;
+ width: 78%;
+ font-size:16px;
  vertical-align:center;
  text-align:left;
 }
 
 .fb_tw_fp{
- width: 49%;
- height: 24px;	
+ width: 20%;	
  vertical-align:bottom;
 }
 
@@ -415,9 +418,9 @@ a:hover, .c-links:hover{
 }
 
 .share_link{
- border:1px solid #D98719;
+ border:1px solid #FFF;
  text-align:center;
- background-color:#D98719;
+ /*background-color:#D98719;*/
 }
 
 .share_link_image{

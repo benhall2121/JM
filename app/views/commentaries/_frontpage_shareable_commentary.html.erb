@@ -3,8 +3,8 @@
 <div class="commentary_whole_fp">
     <div class="commentary_links_fp"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></div>
     <div class="fb_tw_fp">
-      <%= link_to_function image_tag('/images/squareFaceBookIcon24.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
-      <%= link_to_function image_tag('/images/twitter24.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
+      <%= link_to_function image_tag('/images/squareFaceBookIcon16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
+      <%= link_to_function image_tag('/images/twitter16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
     </div>
 </div>
 <% end %>
