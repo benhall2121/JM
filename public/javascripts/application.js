@@ -24,6 +24,41 @@ $(document).ready(function() {
 	  $.getScript(this.href);
 	  return false;		
 	});
+	
+	$("div.edit_fp_title").click(function() {
+			
+			//Create the HTML to insert into the div. Escape any " characters 
+			var ahref = $(this).siblings('span.title').children('a').attr('href');
+			var aText = $(this).siblings('span.title').children('a').text();
+			var thisId = $(this).attr('id');
+			var justId = thisId.substr(5);
+			var inputbox = "<input type='text' class='inputbox text_field edit_fp_input' value=\""+ aText +"\">";
+			
+			//Insert the HTML into the div
+			$(this).siblings('span.title').html(inputbox);
+			$(this).hide();
+			//Immediately give the input box focus. The user
+			//will be expecting to immediately type in the input box,
+			//and we need to give them that ability
+			$("input.inputbox").focus();
+			
+			//Once the input box loses focus, we need to replace the
+			//input box with the current text inside of it.
+			$("input.inputbox").blur(function() {
+				var value = $(this).val();
+				
+				if (aText != value){
+					$.post('/commentaries/update_fp', { "id": justId, "title": value }, function(response) {
+				  // your js code that inserts data into the page
+				 });
+				}
+				
+				var newHtml = '<a href="' + ahref + '" class="c-links" target="blank">' + value + '</a>'
+				$("#"+thisId).siblings('span.title').html(newHtml);
+				$("#"+thisId).show();
+			});
+			return false;
+	});
  });
 
 function poll_vote(){

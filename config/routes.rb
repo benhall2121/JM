@@ -36,6 +36,9 @@ Jm::Application.routes.draw do
   match '/shared_commentary/:shared_user_username/:unique_id/:commentary_title' => 'commentaries#show'
   match '/shared_commentary/:shared_user_username/:unique_id' => 'commentaries#show'
   
+  
+  match '/commentaries/update_fp' => 'commentaries#update_fb'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

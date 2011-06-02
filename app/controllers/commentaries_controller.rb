@@ -152,6 +152,22 @@ class CommentariesController < ApplicationController
       end
     end
   end
+  
+  def update_fb
+  	  puts "in commentaries"
+  	  puts "id"
+  	  puts params[:id]
+  	  puts "title"
+  	  puts params[:title]
+  	  puts
+    @commentary = Commentary.find(params[:id])
+  
+    @commentary.update_attributes(:title => params[:title])
+    
+    respond_to do |format|
+        format.js { render :nothing => true }
+    end
+  end
 
   # DELETE /commentaries/1
   # DELETE /commentaries/1.xml

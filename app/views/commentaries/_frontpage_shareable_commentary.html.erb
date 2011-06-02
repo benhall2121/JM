@@ -2,7 +2,11 @@
 <% admin = is_admin? %>
 <% @commentaries.each do |commentary| %>
 <div class="commentary_whole_fp" id="<%= 'commentary_' + commentary.id.to_s %>" >
-    <div class="commentary_links_fp"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></div>
+    <% if admin %>
+      <div class="commentary_links_fp editme"><span class="title"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></span> <div class="edit_fp_title" id="<%= 'edit_' + commentary.id.to_s %>">Edit</div></div>
+    <% else %>
+      <div class="commentary_links_fp" id="<%= 'edit_' + commentary.id.to_s %>"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></div>  
+    <% end %>
     <div class="fb_tw_fp">
      <!-- Links can only be shared is they have been boosted -->
      <% if commentary.boosts.exists? %>

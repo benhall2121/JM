@@ -10,7 +10,7 @@ body { color:#282828;
        background-position:right;*/
 }
 
-a { text-decoration: none; color:#282828; }
+a, .edit_fp_title { text-decoration: none; color:#282828; }
 a { text-decoration: none; }
 
 h1{
@@ -42,6 +42,11 @@ h1{
   resize: none;
 }
 
+.edit_fp_input{
+ height: 15px;	
+  width: 100%;
+}
+
 div.field, div.actions {
   margin-bottom: 7px;
 }
@@ -50,7 +55,7 @@ div.field, div.actions {
   margin:5px 0 0 0;	
 }
 
-a:hover, .c-links:hover{
+a:hover, .c-links:hover, .edit_fp_title:hover{
  color:#B4B4B4;	
 }
 
@@ -579,6 +584,14 @@ span.new_site_guide_faq{
 .answers{
  padding:10px 0 10px 0;
  font-size:14px;
+}
+
+.edit_fp_title{
+ font-size:10px;	
+}
+
+.edit_fp_title:hover{
+ cursor: pointer;
 }
 
 
