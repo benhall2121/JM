@@ -4,6 +4,8 @@ var commentary_title = '<%= escape_javascript(commentary_title) %>'
 var current_user_id = '<%= escape_javascript(current_user.id.to_s) %>';
 var current_user_name = '<%= escape_javascript(current_user.username.to_s) %>';
 
+$('#save_preview').hide();
+
 $('.boosted_fb_tw_fp').html("<img src='/images/squareFaceBookIcon16sepia.png'><img src='/images/twitter16sepia.png'>");
 
 if('<%= escape_javascript(u) %>' == 'twitter'){

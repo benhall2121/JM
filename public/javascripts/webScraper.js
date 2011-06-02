@@ -13,6 +13,7 @@ jQuery.ajaxSetup({
 $(document).ready(function(){
    
    $("#scraper_input_id").keyup(function(inputValue) {
+   		$('#save_preview').hide();
 		scrap_input = $("#scraper_input_id").val();
 		
 		if(scrap_input == old_url){ return; }
