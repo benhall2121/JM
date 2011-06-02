@@ -53,7 +53,7 @@ class CommentariesController < ApplicationController
   # GET /commentaries/1
   # GET /commentaries/1.xml
   def show
-    if params[:unique_id] && (Time.now > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds)
+    if params[:unique_id]
       strs = params[:unique_id]
       @quesy_hash={}
       
@@ -73,8 +73,11 @@ class CommentariesController < ApplicationController
       
       @user_session = UserSession.new if @user_session.nil?
       
+      #Is it a bot checking the link
+      bot_checking_link = (Time.now < History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds)
+      
       #Check to make sure the site isn't just being refreshed and is coming from another site
-      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.now > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds))
+      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && !bot_checking_link)
        History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.now, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
       end
       
@@ -82,7 +85,7 @@ class CommentariesController < ApplicationController
     end
     @commentary = Commentary.find(params[:id])
 
-   if params[:unique_id] && @commentary.links
+   if params[:unique_id] && @commentary.links && !bot_checking_link
      redirect_to(@commentary.links)
    else 
     respond_to do |format|
