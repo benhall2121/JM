@@ -1,5 +1,9 @@
 module ApplicationHelper
   
+  def title(page_title)
+    content_for(:title) { page_title }
+  end	
+	
   def commentary_created_today
     if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Create Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
       return true

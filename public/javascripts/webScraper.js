@@ -96,6 +96,7 @@ function check_if_valid(){
 	$.post("/commentaries/create", { "commentary" : {
 	  "title": $('#site_title').html(),
 	  "links": $('#site_link').html(),
-	  	"body": $('#site_desc').html() }
+	  "body": $('#site_desc').html(),
+	  "image_url": $('#site_image').html() }
 	}, null, "script");	
 }

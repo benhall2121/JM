@@ -1,31 +1,17 @@
+<% title @commentary.title %>
 <p id="notice"><%= notice %></p>
 
 <meta property="og:title" content="<%= @commentary.title %>"/>
 
-<% if current_user && current_user.id == @commentary.user_id %>
-  <%= link_to '(Edit)', edit_commentary_path(@commentary) %> |
-  <%= link_to 'Delete', @commentary, :confirm => 'Are you sure?', :method => :delete %>
-<% end %>
-  
 <p>
-  <b>Title:</b>
-  <%= @commentary.title %>
+  <h1><%= @commentary.title %></h1>
 </p>
 
 <p>
-  <b>Links:</b>
-  <%= @commentary.links %>
-</p>
-
-<p>
-  <b>Body:</b>
   <%= @commentary.body %>
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @commentary.user_id %>
+  <%= image_tag @commentary.image_url %>
 </p>
 
-
-<%= link_to 'View All Commentaries', commentaries_path %>

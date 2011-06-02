@@ -154,12 +154,6 @@ class CommentariesController < ApplicationController
   end
   
   def update_fb
-  	  puts "in commentaries"
-  	  puts "id"
-  	  puts params[:id]
-  	  puts "title"
-  	  puts params[:title]
-  	  puts
     @commentary = Commentary.find(params[:id])
   
     @commentary.update_attributes(:title => params[:title])
@@ -253,6 +247,7 @@ class CommentariesController < ApplicationController
         
         # If the src is empty move on.
         next if src.nil? || src.empty?
+        
         # If we don't have an absolute path already, let's make one.     
         if !root.nil? && src[0,4] != "http"
           if src[0,1] != "/"
@@ -260,12 +255,27 @@ class CommentariesController < ApplicationController
           end
           src = root + slash + src
         end
-        
+       
         if completed_urls == ""
-          completed_urls = src
-        else
-          completed_urls = completed_urls + "," + src
-        end
+         completed_urls = src
+ 	else
+ 		# We want pngs if any
+ 		#Compare the two if they are both png's or of neither are pngs
+ 		if (completed_urls.match(/.png/i) && src.match(/.png/i)) || (!completed_urls.match(/.png/i) && !src.match(/.png/i))
+			if completed_urls.size < src.size
+				completed_urls = src	
+			end
+		elsif (!completed_urls.match(/.png/i) && src.match(/.png/i)) 
+			completed_urls = src
+		end	
+ 	end
+        
+       # Use this if doing an image picker
+       # if completed_urls == ""
+       #   completed_urls = src
+       # else
+       #   completed_urls = completed_urls + "," + src
+       # end
       }
 
         return completed_urls  

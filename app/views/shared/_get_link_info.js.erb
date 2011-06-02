@@ -2,5 +2,11 @@ $("#loader").fadeOut('fast');
 $(".preview #site_title").html("<%= escape_javascript(u[:site_title]) %>");
 $(".preview #site_link").html("<%= escape_javascript(u[:site_link]) %>");
 $(".preview #site_desc").html("<%= escape_javascript(u[:site_desc]) %>");
+
+/* currently only one image is returned */
+var q = "<%= escape_javascript(u[:site_images]) %>"
+images = q.split(',');
+
+$(".preview #site_image").html(images[0]);
 $(".preview").show('fast');
 
