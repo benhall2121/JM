@@ -2,7 +2,7 @@
 <div class="mainOverview-left-coulmn">
 
 	<div class="mainOverview-user-stats">
-	  <div class="level"><span>Level</span> <br /> <span><%= user_level %></span></div>
+	  <div class="level"><span>Level</span> <br /> <span><%= user_level %>/5</span></div>
           <div class="PageViews"><span>PageViews</span> <br /> <span><%= page_views_count %></span></div>
 	  <div class="Rank"><span>Rank</span> <br /> <span><%= rank_of_user %></span></div>
 	</div>
@@ -10,47 +10,45 @@
 	<div class="mainOverview-current-tasks">
 	<ul class="ttul">
 	    <div class="show_page_header_titles center_header">Current Challenge</div>
-	    <div class="show_page_header_titles_small center_header">Since May 23, 2011</div>
+	    <div class="show_page_header_titles_small center_header">Since <%= Date.today.strftime('%B %d, %Y') %></div>
 	    
 	    <% if current_challenge_complete %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Share two pieces of content to Facebook or Twitter</div>  
+		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Share one content item to Facebook and/or Twitter</div>  
 	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Share two pieces of content to Facebook or Twitter</div>
+		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Share one content item to Facebook and/or Twitter</div>
 	    <% end %>
 	</ul>
 	</div>
 	<div class="mainOverview-tasks">
 	<ul class="ttul">
-	    <div class="show_page_header_titles center_header">Milestones</div>
-	    <% if milestone_share_first_content %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Shared your first Content</div>  
-	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Shared your first Content</div>
-	    <% end %>
-	   
-	    <% if milestone_achieved_first_page_view %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>  
-	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>
-	    <% end %>
-	    
-	    <% if milestone_complete_your_first_challenge %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>  
-	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>
-	    <% end %>
-	    
-	    <% if milestone_achieved_10th_page_view %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>  
-	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>
-	    <% end %>
-	    
-	    <% if milestone_achieved_100th_page_view %>
-		<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>  
-	     <% else %>
-		<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>
-	    <% end %>
+	    <div class="show_page_header_titles center_header">Milestones - Level <%= user_level %></div>
+	      <% if user_level == 1 %>
+	            <% if milestone_complete_your_first_challenge %>
+			<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>  
+		     <% else %>
+			<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Complete your first Challenge</div>
+		    <% end %>
+		    
+		    <% if milestone_achieved_first_page_view %>
+			<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>  
+		     <% else %>
+			<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve your first PageView</div>
+		    <% end %>
+		    
+		    <% if milestone_achieved_10th_page_view %>
+			<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>  
+		     <% else %>
+			<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 10 PageViews</div>
+		    <% end %>
+		    
+		    <% if milestone_achieved_100th_page_view %>
+			<div class="finishedTodaysTasks"><%= image_tag('/images/checked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>  
+		     <% else %>
+			<div><%= image_tag('/images/unchecked.png', :class=> "home_checkbox") %> Achieve 100 PageViews</div>
+		    <% end %>
+	      <% else %>
+		   Nothing for any level above 1
+	      <% end %>
 	 
 	</ul>
 	</div>
@@ -105,10 +103,10 @@
 </div>
 
 <div class="mainOverview-right-coulmn-bottom">
- <div class="small_link"><%= link_to "See More", shareable_commentaries_path %></div>
- <div class="show_page_header_titles_large">Browse and Share content</div>
+   <div class="show_page_header_titles_large">Browse and Share content</div>
+   <div class="small_link front_page_content"><%= render 'shared/content_nav' %></div>
  
- <div class="all_commentary">
+ <div class="all_commentary" id="all_commentary">
  <%= render :partial => "commentaries/frontpage_shareable_commentary"  %>
  </div>
  

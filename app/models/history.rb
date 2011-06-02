@@ -22,6 +22,8 @@ class History < ActiveRecord::Base
     	  History.new(params).save!
         end
     else
+    	    puts Time.now.utc
+    	    Time.now.utc
       History.new(params).save!
     end
   end

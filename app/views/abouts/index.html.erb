@@ -1,0 +1,11 @@
+<%= render 'shared/about_nav' %>
+<div class="about_sections_main_div">
+<div class="about_sections_header">About <% if is_admin? %><span class="new_site_guide_faq"><%= link_to 'New About', new_about_path %></span><% end %></div>
+
+<% @abouts.each do |about| %>
+ <div class="about_wrapper">
+  <div><%= about.body %></div>
+  <% if is_admin? %><div class="about_admin_div"><%= link_to 'Edit', edit_about_path(about) %> <%= link_to 'Delete', about, :confirm => 'Are you sure?', :method => :delete %></div><% end %>
+ </div>
+<% end %>
+</div>

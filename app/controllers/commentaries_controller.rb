@@ -18,30 +18,42 @@ class CommentariesController < ApplicationController
   def shareable
   	
    boost = Boost.find(:all).map(&:commentary_id)
+
       if params[:boost] && current_user.admin?
    	#Commentaries that have NOT been boosted
-  	conditions = ["id NOT in (?)", boost]
+   	if boost.blank?
+   	 conditions = ["id IS NOT NULL"]	
+   	else
+  	 conditions = ["id NOT in (?)", boost]
+        end
       elsif !params[:user_id].nil? && !params[:pending]
   	#Commentaries for the current user that have been boosted
-  	conditions =  ["user_id=(?) AND id in (?)", current_user, boost]
+  	 conditions =  ["user_id=(?) AND id in (?)", current_user, boost]
       elsif !params[:user_id].nil? && params[:pending]
   	#Commentaries for the current user that have NOT been boosted
-  	conditions = ["user_id=(?) AND id NOT in (?)", current_user, boost]
+  	if boost.blank?
+  	 conditions = ["user_id=(?) AND id IS NOT NULL", current_user]
+	else
+  	 conditions = ["user_id=(?) AND id NOT in (?)", current_user, boost]
+	end
       else
+      	# Only boosted commentaries for the front page
         conditions = ["id in (?)", boost]
+        limit = 30
       end
-    @commentaries = Commentary.find(:all, :conditions => conditions, :order => 'created_at desc')
+    @commentaries = Commentary.find(:all, :limit => limit || 50000, :conditions => conditions, :order => 'created_at desc')
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @commentaries }
+      format.js { }
     end
   end
 
   # GET /commentaries/1
   # GET /commentaries/1.xml
   def show
-    if params[:unique_id]
+    if params[:unique_id] && (Time.now > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds)
       strs = params[:unique_id]
       @quesy_hash={}
       
@@ -62,8 +74,8 @@ class CommentariesController < ApplicationController
       @user_session = UserSession.new if @user_session.nil?
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
-      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.current > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds))
-       History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.current, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
+      if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && (Time.now > History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 60.seconds))
+       History.create_history(:history_id => commentary_id, :user_id => user_shared, :history_type => 'Shared Commentary Link', :datetime => Time.now, :ipaddress => coming_from_ip_address, :HttpReferrer => coming_from )
       end
       
       params[:id] = commentary_id
@@ -74,8 +86,6 @@ class CommentariesController < ApplicationController
      redirect_to(@commentary.links)
    else 
     respond_to do |format|
-     
-     	     puts "222"
       format.html # show.html.erb
       format.xml  { render :xml => @commentary }
     end
@@ -153,10 +163,18 @@ class CommentariesController < ApplicationController
   end
   
   def share_commentary
-    if !History.find_by_history_type_and_history_id_and_user_id('Share Commentary', params[:commentary_id], current_user.id)	  
-      History.create_history(:history_id => params[:commentary_id], :user_id => current_user.id, :history_type => 'Share Commentary', :datetime => Time.current )
+    share_h = History.find_by_history_type_and_history_id_and_user_id('Share Commentary', params[:commentary_id], current_user.id)
+    if !share_h	 
+      History.create_history(:history_id => params[:commentary_id], :user_id => current_user.id, :history_type => 'Share Commentary', :datetime => Time.now, :milestone_type => params[:where_to] )
+      mt = params[:where_to]
+    elsif share_h && share_h.milestone_type != 'facebook / twitter' && share_h.milestone_type != params[:where_to]
+      share_h.update_attributes(:milestone_type => 'facebook / twitter')
     end
-    render :nothing => true  
+    mt = share_h.milestone_type if mt.nil?
+    
+    respond_to do |format|
+    	    format.js { render "commentaries/update_share_icons", :locals => {:u => mt.to_s, :commentary_id => params[:commentary_id].to_s, :commentary_title => params[:commentary_title].to_s } }
+    end
   end
   
   

@@ -1,10 +1,42 @@
-
+<% lcs = last_commentary_shared %>
+<% admin = is_admin? %>
 <% @commentaries.each do |commentary| %>
-<div class="commentary_whole_fp">
+<div class="commentary_whole_fp" id="<%= 'commentary_' + commentary.id.to_s %>" >
     <div class="commentary_links_fp"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></div>
     <div class="fb_tw_fp">
-      <%= link_to_function image_tag('/images/squareFaceBookIcon16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
-      <%= link_to_function image_tag('/images/twitter16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
+     <!-- Links can only be shared is they have been boosted -->
+     <% if commentary.boosts.exists? %>
+     <div class="boosted_fb_tw_fp" id="<%= 'share_links_' + commentary.id.to_s %>">
+      <% if !lcs %>
+        <%= link_to_function image_tag('/images/squareFaceBookIcon16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
+        <%= link_to_function image_tag('/images/twitter16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
+      <% else %>
+        <% if lcs.history_id == commentary.id && lcs.milestone_type != 'facebook' && lcs.milestone_type != 'facebook / twitter' %>
+          <%= link_to_function image_tag('/images/squareFaceBookIcon16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
+        <% else %>
+          <%= image_tag('/images/squareFaceBookIcon16sepia.png') %>
+        <% end %>
+        <% if lcs.history_id == commentary.id && lcs.milestone_type != 'twitter' && lcs.milestone_type != 'facebook / twitter' %>
+          <%= link_to_function image_tag('/images/twitter16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
+        <% else %>
+          <%=  image_tag('/images/twitter16sepia.png') %>
+        <% end %>
+      <% end %>
+     </div>
+     <% end %>
+     
+     <% if admin %>
+	  <div class="commentary_boost">
+	    <div class="boost_button_div">
+	    <% if !commentary.boosts.exists? %>
+	      <%= link_to 'Boost', create_boost_path(:commentaries_id => commentary), :class => 'shaded_button boost_button' %>
+	    <% else %>
+	      <%= link_to 'Boosted', destroy_boost_path(:commentaries_id => commentary), :confirm => 'Are you sure?', :class => 'shaded_button unboost_button' %>
+	    <% end %>
+	    </div>
+	  </div>
+	<% end %>
+     
     </div>
 </div>
 <% end %>

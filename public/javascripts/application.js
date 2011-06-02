@@ -1,9 +1,28 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+jQuery.ajaxSetup({
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}		
+});
+
 $(document).ready(function() {
 	$('.questions').click(function() {
 	  $(this).parent().nextAll('.answers').slideToggle('fast');	
+	});
+	
+	$('.front_page_content a').live("click", function() {
+	  $.getScript(this.href);
+	  return false;
+	});
+	
+	$('.boost_button_div a.boost_button').live("click", function(){
+	  $.post(this.href, $(this).serialize(), null, "script");
+	  return false;
+	});
+	
+	$('.boost_button_div a.unboost_button').live("click", function(){
+	  $.getScript(this.href);
+	  return false;		
 	});
  });
 
@@ -41,9 +60,7 @@ function share(commentary_id, commentary_title, current_user_name, current_user_
 	
 	window.open(encodeURI(url));
 	
-	$.post('/commentaries/share_commentary', { "commentary_id": commentary_id }, function(response) {
-	  // your js code that inserts data into the page
-	 });
+	$.post('/commentaries/share_commentary', { "commentary_id": commentary_id, "where_to":to_where, "commentary_title": commentary_title }, null, "script");
 	 
 	 return false;
 }

@@ -154,6 +154,12 @@ a:hover, .c-links:hover{
  font-weight:bold;
 }
 
+#firstNav div.history_count span.nav_name{
+ font-weight:normal;
+ margin-left:10px;
+ font-size:14px;
+}
+
 .header{
  margin-bottom:10px;	
 }
@@ -232,9 +238,9 @@ a:hover, .c-links:hover{
 .mainOverview-welcome-name, .mainOverview-user-stats, .mainOverview-current-tasks, .mainOverview-tasks, .mainOverview-right-coulmn-top, .mainOverview-right-coulmn-bottom, .registration_wrapper{
   padding:7px;
   border: 1px solid #B0B0B0;
-  box-shadow: 0px 0px 4px #0000CD;
-  -webkit-box-shadow: 0px 0px 4px #0000CD;
-  -moz-box-shadow: 0px 0px 4px #0000CD;
+  box-shadow: 0px 0px 7px #A6A6A6;
+  -webkit-box-shadow: 0px 0px 7px #A6A6A6;
+  -moz-box-shadow: 0px 0px 7px #A6A6A6;
  background-color:#FDFDFD;
 }
 
@@ -270,6 +276,8 @@ a:hover, .c-links:hover{
 .mainOverview-tasks ul, .mainOverview-current-tasks ul{
   margin:0px;
   padding:7px;
+  font-size:14px;
+  /*border:1px solid #B0B0B0;*/
 }
 
 .mainOverview-current-tasks{
@@ -283,6 +291,14 @@ a:hover, .c-links:hover{
 .mainOverview-right-coulmn-bottom{
  text-align:center;
  margin-top:10px;	
+}
+
+.mainOverview-right-coulmn-bottom div.show_page_header_titles_large{
+  float:left; 
+}
+
+.mainOverview-right-coulmn-bottom div.small_link{
+  float:right;
 }
 
 .mainOverview-right-coulmn-top div.form_row{
@@ -356,9 +372,19 @@ a:hover, .c-links:hover{
  -moz-box-shadow: 2px 2px 0px #999;
 }
 
+.fb_tw_fp .shaded_button{
+ padding:1px 5px 1px 5px;
+ font-size: 10px;
+}
+
+.fb_tw_fp .commentary_boost{
+ vertical-align:top;	
+}
+
 .all_commentary{
  overflow:hidden;	
  padding-bottom:15px;
+ width:100%;
 }
 
 .new_commentary_main_div{
@@ -409,7 +435,7 @@ a:hover, .c-links:hover{
 }
 
 .fb_tw_fp img{
- padding-left:15px;	
+ padding-right:10px;	
 }
 
 .commentary_boost{

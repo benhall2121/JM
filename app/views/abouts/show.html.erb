@@ -1,0 +1,10 @@
+<%= render 'shared/about_nav' %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= simple_format @about.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_about_path(@about) %> |
+<%= link_to 'Back', abouts_path %>

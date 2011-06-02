@@ -1,4 +1,4 @@
-<%= link_to 'All Content', shareable_commentaries_path() %> | <%= link_to 'My Content', shareable_commentaries_path(:user_id => current_user) %> | <%= link_to 'Pending', shareable_commentaries_path(:user_id => current_user, :pending => true) %> <% if is_admin? %>| <%= link_to 'Boost Content', shareable_commentaries_path(:boost => true) %><% end %>
+<%= render 'shared/content_nav' %>
 <h1>Browse and Share Content</h1>
 <div class="all_commentary">
 <%= render 'show_shareable_commentary' %>

@@ -1,15 +1,7 @@
 module ApplicationHelper
-	
-  def taken_todays_poll  
-    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Poll Taken', (Date.today-1.day).to_s + ' 23:59:59'], :order => "datetime DESC")
-      return true
-    else
-      return false
-    end
-  end
   
   def commentary_created_today
-    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Create Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "datetime DESC")
+    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Create Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
       return true
     else
       return false
@@ -17,7 +9,7 @@ module ApplicationHelper
   end
   
   def boost_commentary_today
-    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Boost Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "datetime DESC")
+    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Boost Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
       return true
     else
       return false
@@ -25,12 +17,17 @@ module ApplicationHelper
   end  
   
   def share_commentary_today
-    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND datetime > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "datetime DESC")
+  	  if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
       return true
     else
       return false
     end
   end  
+  
+  def shared_commentary_count_today
+    history = History.find(:first, :conditions => ['user_id = (?) AND history_type = (?)', current_user.id, 'Share Commentary'], :order => 'created_at desc') 
+    return history.created_at.to_date >= Date.today
+  end
   
   def shared_commentary_count
     return History.find(:all, :conditions => ['user_id = (?) AND history_type = (?)', current_user.id, 'Share Commentary']).count 
@@ -57,7 +54,19 @@ module ApplicationHelper
   end
   	
   def user_level
-    return History.find(:all, :conditions => ['user_id = (?) AND history_type = (?)', current_user.id, 'Milestone']).count	  
+    user_level_count = 1	  
+    # Level 1
+    if milestone_complete_your_first_challenge && milestone_achieved_first_page_view && milestone_achieved_10th_page_view && milestone_achieved_100th_page_view
+     user_level_count = 2    
+    end
+  	  
+    # Level 2
+    if user_level_count == 2 
+    	    puts "user testing for level 2" 
+      user_level_count = 3  
+    end
+    
+    return user_level_count
   end
   
   def rank_of_user
@@ -100,7 +109,11 @@ module ApplicationHelper
   end
   
   def milestone_complete_your_first_challenge
-  	  return false
+    if History.find(:all, :conditions => ['user_id = (?) AND history_type = (?) AND milestone_type = (?)', current_user.id, 'Milestone', 'Complete your first Challenge'])
+     return true
+    else
+     return false
+    end
   end
   
   def milestone_achieved_10th_page_view
@@ -122,7 +135,13 @@ module ApplicationHelper
   end
   
   def current_challenge_complete
-  	  return false  
+    ccc = share_commentary_today	  
+  	  
+    if (ccc && !History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND milestone_type = (?)', current_user.id, 'Milestone', 'Complete your first Challenge']))  
+      History.create_history(:user_id => current_user.id, :history_type => 'Milestone', :datetime => Time.current, :milestone_type => 'Complete your first Challenge')	    
+    end		  
+    	  
+    return ccc
   end
   
   def logged_in?
@@ -131,6 +150,10 @@ module ApplicationHelper
   
   def is_admin?
     return current_user.admin?	  
+  end
+  
+  def last_commentary_shared
+    return History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")	
   end
 	
 end

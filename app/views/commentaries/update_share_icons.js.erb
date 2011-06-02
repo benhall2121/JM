@@ -1,0 +1,14 @@
+
+var commentary_id = '<%= escape_javascript(commentary_id) %>'
+var commentary_title = '<%= escape_javascript(commentary_title) %>'
+var current_user_id = '<%= escape_javascript(current_user.id.to_s) %>';
+var current_user_name = '<%= escape_javascript(current_user.username.to_s) %>';
+
+$('.boosted_fb_tw_fp').html("<img src='/images/squareFaceBookIcon16sepia.png'><img src='/images/twitter16sepia.png'>");
+
+if('<%= escape_javascript(u) %>' == 'twitter'){
+  $('#share_links_'+commentary_id).html('<a href="#" onclick=share(' + commentary_id + ',"' + escape(commentary_title) + '","' + current_user_name + '",' + current_user_id + ',"facebook")><img src="/images/squareFaceBookIcon16.png"></a><img src="/images/twitter16sepia.png">');  
+} else if ('<%= escape_javascript(u) %>' == 'facebook') {
+ $('#share_links_'+commentary_id).html('<img src="/images/squareFaceBookIcon16sepia.png"><a href="#" onclick=share(' + commentary_id + ',"' + escape(commentary_title) + '","' + current_user_name + '",' + current_user_id + ',"twitter")><img src="/images/twitter16.png"></a>');  
+}
+
