@@ -55,18 +55,20 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.xml
   def create
-  	  
-  	  puts "reg code"
-  	  puts params[:user][:registration_code]
-  	  
     @user = User.new(params[:user])
 
+    if params[:user][:registration_code] == 'password'
+    	    reg_code_pass = true
+    else
+    	    reg_code_pass = false
+    	    @user.errors.add('registration_code', 'is incorrect')
+    end
+    
     respond_to do |format|
-      if params[:user][:registration_code] == 'password' && @user.save
+      if reg_code_pass && @user.save
       	format.html { redirect_to(@user, :notice => 'Registration successfull.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
-      	@user.errors.add('registration_code', 'is incorrect')
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
