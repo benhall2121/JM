@@ -14,6 +14,7 @@ class UserSessionsController < ApplicationController
   # POST /user_sessions
   # POST /user_sessions.xml
   def create
+  	  
     @user_session = UserSession.new(params[:user_session])
 
     respond_to do |format|
@@ -22,7 +23,7 @@ class UserSessionsController < ApplicationController
       	format.html { redirect_to(@user, :notice => 'Login Successful') }
         format.xml  { render :xml => @user_session, :status => :created, :location => @user_session }
       else
-        format.html { render :action => "new" }
+      	      format.html { redirect_to :controller => "users", :action => "new" }
         format.xml  { render :xml => @user_session.errors, :status => :unprocessable_entity }
       end
     end

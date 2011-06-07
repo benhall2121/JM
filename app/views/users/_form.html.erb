@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <div class="field">
+    <%= f.text_field :registration_code, :class => 'text_field', :placeholder => 'Registration Code' %>
+  </div>
   <div class="field">
     <%= f.text_field :username, :class => 'text_field', :placeholder => 'Username' %>
   </div>
@@ -23,6 +26,61 @@
   <div class="field">
       <%= f.password_field :password_confirmation, :class => 'text_field', :placeholder => 'Password Confirmation' %>
     </div>
+  <div class="field">
+  <%= f.label 'State You Vote In' %>  
+  <%= f.select :state_you_vote_in, ['AK',
+			'AL',
+			'AR',
+			'AZ',
+			'CA',
+			'CO',
+			'CT',
+			'DC',
+			'DE',
+			'FL',
+			'GA',
+			'HI',
+			'IA',
+			'ID',
+			'IL',
+			'IN',
+			'KS',
+			'KY',
+			'LA',
+			'MA',
+			'MD',
+			'ME',
+			'MI',
+			'MN',
+			'MO',
+			'MS',
+			'MT',
+			'NC',
+			'ND',
+			'NE',
+			'NH',
+			'NJ',
+			'NM',
+			'NV',
+			'NY',
+			'OH',
+			'OK',
+			'OR',
+			'PA',
+			'RI',
+			'SC',
+			'SD',
+			'TN',
+			'TX',
+			'UT',
+			'VA',
+			'VT',
+			'WA',
+			'WI',
+			'WV',
+			'WY'], 
+			:include_blank => false %>
+  </div>
   <div class="actions">
     <%= f.submit "Register", :class => 'shaded_button', :style => "background-color:white;" %>
   </div>

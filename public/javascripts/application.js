@@ -25,6 +25,11 @@ $(document).ready(function() {
 	  return false;		
 	});
 	
+	$('.delete_com').live("click", function(){
+	  $.getScript(this.href);
+	  return false;		
+	});
+	
 	$("div.edit_fp_title").click(function() {
 			
 			//Create the HTML to insert into the div. Escape any " characters 
@@ -36,6 +41,7 @@ $(document).ready(function() {
 			
 			//Insert the HTML into the div
 			$(this).siblings('span.title').html(inputbox);
+			$(this).siblings('div.delete_com_fp').hide();
 			$(this).hide();
 			//Immediately give the input box focus. The user
 			//will be expecting to immediately type in the input box,
@@ -55,6 +61,7 @@ $(document).ready(function() {
 				
 				var newHtml = '<a href="' + ahref + '" class="c-links" target="blank">' + value + '</a>'
 				$("#"+thisId).siblings('span.title').html(newHtml);
+			        $("#"+thisId).siblings('div.delete_com_fp').show();
 				$("#"+thisId).show();
 			});
 			return false;

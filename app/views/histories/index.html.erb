@@ -7,24 +7,28 @@
       <% if hist_type == 'Poll Taken' %>
          <li><%= hist_type %></li>
       <% elsif hist_type == 'Create Commentary' %>
-       <% hist.each do |cc| %>
-         <li>Created Commentary, <%= link_to truncate(Commentary.find_by_id(cc.history_id).title, :length => 55), commentary_path(cc.history_id), :class => 'c-links' if Commentary.find_by_id(cc.history_id) %></li>
+         <% hist.each do |cc| %>
+           <% cc_all = Commentary.find_by_id(cc.history_id) %>
+           <li>Created Commentary, <%= link_to truncate(cc_all.title, :length => 55), cc_all.links, :target => 'blank', :class => 'c-links' if Commentary.find_by_id(cc.history_id) %></li>
          <% end %>
       <% elsif hist_type == 'Boost Commentary' %>
-       <% hist.each do |bc| %>
-         <li>Boosted Commentary, <%= link_to truncate(Commentary.find_by_id(bc.history_id).title, :length => 55), commentary_path(bc.history_id), :class => 'c-links' if Commentary.find_by_id(bc.history_id) %></li>
+         <% hist.each do |bc| %>
+           <% bc_all = Commentary.find_by_id(bc.history_id) %>
+           <li>Boosted Commentary, <%= link_to truncate(bc_all.title, :length => 55), bc_all.links, :target => 'blank', :class => 'c-links' if Commentary.find_by_id(bc.history_id) %></li>
          <% end %>
       <% elsif hist_type == 'Share Commentary' %>
-       <% hist.each do |sc| %>
-         <li>Shared: Content to Facebook, <%= link_to truncate(Commentary.find_by_id(sc.history_id).title, :length => 55), commentary_path(sc.history_id), :class => 'c-links' if Commentary.find_by_id(sc.history_id) %></li>
-       <% end %>
+         <% hist.each do |sc| %>
+           <% sc_all = Commentary.find_by_id(sc.history_id) %>
+           <li>Shared: Content to Facebook, <%= link_to truncate(sc_all.title, :length => 55), sc_all.links, :target => 'blank', :class => 'c-links' if Commentary.find_by_id(sc.history_id) %></li>
+         <% end %>
       <% elsif hist_type == 'Shared Commentary Link' %>
-       <% hist.group_by(&:group_by_history_id).sort.each do |hist_id, h| %>
-         <li>PageViews : <%= h.count %> for <%= link_to Commentary.find_by_id(hist_id).title, commentary_path(hist_id), :class => 'c-links' if Commentary.find_by_id(hist_id)  %></li>
-       <% end %>
+         <% hist.group_by(&:group_by_history_id).sort.each do |hist_id, h| %>
+           <% h_all = Commentary.find_by_id(hist_id) %>
+           <li>PageViews : <%= h.count %> for <%= link_to h_all.title, h_all.links, :target => 'blank', :class => 'c-links' if Commentary.find_by_id(hist_id)  %></li>
+         <% end %>
       <% elsif hist_type == 'Milestone' %>
-       <% hist.each do |m| %> 
-         <li>Milestone: <%= m.milestone_type %></li>
+         <% hist.each do |m| %> 
+           <li>Milestone: <%= m.milestone_type %></li>
          <% end %>  
       <% else %>
          <li><%= hist_type %></li>

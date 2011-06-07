@@ -4,10 +4,10 @@
   <title><%= yield(:title) || "JM" %></title>
   <link href='http://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all, 'jquery', 'application', 'webScraper' %>
+  <%= javascript_include_tag :all, 'jquery', 'application', 'webScraper','progressbar' %>
   <%= csrf_meta_tag %>
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css" %>
-  <%#= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js", "application" %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js" %>
 
 <script type="text/javascript">
 
@@ -29,6 +29,13 @@
 
 <div class="all">
   <div class="header">
+    <div class="logo">
+      <% if logged_in? %>
+        <%= link_to image_tag('/images/logoSmall.jpg'), root_path %>
+      <% else %>
+          <%= link_to image_tag('/images/logo.jpg'), root_path %>
+      <% end %>
+    </div>
     <div id="firstNav">
       <% if logged_in? %>
         <div id="history_count" class="history_count"><%= link_to (user_level.to_s + ' / ' + page_views_count.to_s + ' / ' + rank_of_user.to_s ) , histories_path() %>
@@ -36,36 +43,30 @@
 	</div>
     	<div class="about_header"><%= link_to "Home", user_path(current_user.id) %> | <%= link_to "Account", edit_user_path(current_user.id) %> | <%= link_to "About", abouts_path() %></div>
       <% else %>
-      <%=  render :partial => 'user_sessions/form' %>
+      <div id="history_count" class="history_count">
+        <%= link_to "Home", root_path() %> | <%= link_to "About", abouts_path() %>
+      </div>
+      <div class="about_header about_header_login">
+        <%#=  render :partial => 'user_sessions/form' %>
+        <% form_for :user_session, :url => :usersessionscreate do |f| %>
+              <div class="field" style="padding:0 6px 0 0; margin:0px;">
+                <%= f.text_field :username, :class => 'text_field text_field_login', :placeholder => 'Username' %>
+	      </div>
+	      <div class="field" style="padding:0 6px 0 0; margin:0px;">
+	        <%= f.password_field :password, :class => 'text_field text_field_login', :placeholder => 'password' %>
+	      </div>
+	      <div class="actions" style="padding:0 6px 0 0; margin:0px;">
+	        <%= f.submit :Login, :class => 'shaded_button', :style => "background-color:white;" %>
+	      </div>
+        <% end %>
+      </div>
       <% end %>   
     </div>
-   <!-- <% if current_user %>
-    <div id="secondNav">
-        <%= link_to(new_commentary_path) do %><div class="secondNavButton">Create</div><% end %>
-    	<%= link_to(commentaries_path) do %><div class="secondNavButton">Boost</div><% end %>
-    	<%= link_to(shareable_commentaries_path) do %><div class="secondNavButton">Share</div><% end %>
-    </div>
-    <% end %> 
-    -->
   </div>
-
+  
 <%= yield %>
 </div>
 
-<!--
-<% if !(params[:controller] == 'users' && params[:action] == 'index') %>
-<div class="footer">
-    <% if current_user %>
-      <%= link_to "Edit Profile", edit_user_path(current_user.id)%> |
-      <%= link_to "Logout", :logout%>
-   <% end %>
-   <% if !logged_in? %>
-     <%= link_to "Sign Up", new_user_path%> |
-     <%= link_to "Login", :login%>
-   <% end %>
-</div>
-<% end %>
--->
 
 </body>
 </html>

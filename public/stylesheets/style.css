@@ -32,6 +32,11 @@ h1{
   width: 75%;
 }
 
+.text_field_login{
+  height:20px;	
+  width: 100%;
+}
+
 .text_field:hover, .text_area:hover, .text_field:focus, .text_area:focus{
  border: 1px solid #616161;	
 }
@@ -65,13 +70,11 @@ a:hover, .c-links:hover, .edit_fp_title:hover{
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
-  display: table;
+  background-color: #CCC;
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
+  border: 2px solid #CCC;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
@@ -81,12 +84,12 @@ a:hover, .c-links:hover, .edit_fp_title:hover{
 #error_explanation h2 {
   text-align: left;
   font-weight: bold;
-  padding: 5px 5px 5px 15px;
+  padding: 5px 5px 5px 5px;
   font-size: 12px;
   margin: -7px;
   margin-bottom: 0px;
-  background-color: #c00;
-  color: #fff;
+  background-color: #CCC;
+  color: #000;
 }
 
 #error_explanation ul li {
@@ -246,7 +249,13 @@ a:hover, .c-links:hover, .edit_fp_title:hover{
   box-shadow: 0px 0px 7px #A6A6A6;
   -webkit-box-shadow: 0px 0px 7px #A6A6A6;
   -moz-box-shadow: 0px 0px 7px #A6A6A6;
- background-color:#FDFDFD;
+  background-color:#FDFDFD;
+}
+
+.mainOverview-total-pageviews{
+  padding:7px;	
+  background-color:#FDFDFD;
+  font-size:12px;
 }
 
 .registration_wrapper{
@@ -300,10 +309,12 @@ a:hover, .c-links:hover, .edit_fp_title:hover{
 
 .mainOverview-right-coulmn-bottom div.show_page_header_titles_large{
   float:left; 
+  margin-bottom:15px;
 }
 
 .mainOverview-right-coulmn-bottom div.small_link{
   float:right;
+  margin-bottom:15px;
 }
 
 .mainOverview-right-coulmn-top div.form_row{
@@ -586,7 +597,7 @@ span.new_site_guide_faq{
  font-size:14px;
 }
 
-.edit_fp_title{
+.edit_fp_title, .delete_com_fp{
  font-size:10px;	
 }
 
@@ -594,5 +605,18 @@ span.new_site_guide_faq{
  cursor: pointer;
 }
 
+/***** Progress Bar *****/
 
+.ui-progressbar *
+	{ margin: 0; padding: 0; }
 
+.ui-progressbar dl
+	{ height: 100%; }
+
+.ui-progressbar dt
+	{ width: 0; height: 0; overflow: hidden; }
+
+.ui-progressbar dd
+	{ text-indent: -9000px; height: 100%; float: left; }
+
+/***** End Progress Bar *****/

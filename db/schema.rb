@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110602225240) do
+ActiveRecord::Schema.define(:version => 20110607073311) do
 
   create_table "abouts", :force => true do |t|
-    t.string   "body"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(:version => 20110602225240) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "admin"
+    t.string   "state_you_vote_in"
+    t.string   "registration_code"
   end
 
 end

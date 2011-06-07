@@ -21,10 +21,12 @@ Jm::Application.routes.draw do
   resources :users, :user_sessions
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'usersessionscreate' => 'user_sessions#create', :as => :usersessionscreate
   
   match 'signin' => 'users#new', :as => :signin
   match 'create_boost/(:commentaries_id)' => 'boosts#create', :as => :create_boost
   match 'destroy_boost/(:commentaries_id)' => 'boosts#destroy', :as => :destroy_boost
+  match 'destroy_commentary/(:id)' => 'commentaries#destroy', :as => :destroy_commentary
   
   match '/(:permalink)' => 'pages#show', :permalink => 'about'
   

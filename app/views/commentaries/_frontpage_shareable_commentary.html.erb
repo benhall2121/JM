@@ -1,14 +1,19 @@
 <% lcs = last_commentary_shared %>
 <% admin = is_admin? %>
+<% if @commentaries.blank? %>
+ <div class="commentary_whole_fp">
+   Empty
+ </div>
+<% else %>
 <% @commentaries.each do |commentary| %>
 <div class="commentary_whole_fp" id="<%= 'commentary_' + commentary.id.to_s %>" >
     <% if admin %>
-      <div class="commentary_links_fp editme"><span class="title"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></span> <div class="edit_fp_title" id="<%= 'edit_' + commentary.id.to_s %>">Edit</div></div>
+    <div class="commentary_links_fp editme"><span class="title"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></span> <div class="edit_fp_title" id="<%= 'edit_' + commentary.id.to_s %>">Edit</div> <div class="delete_com_fp"><%= link_to "Delete", destroy_commentary_path(:id => commentary), :confirm => 'Are you sure?', :class => 'delete_com' %></div></div>
     <% else %>
       <div class="commentary_links_fp" id="<%= 'edit_' + commentary.id.to_s %>"><%= link_to commentary.title, commentary.links, :target => 'blank', :class => 'c-links' %></div>  
     <% end %>
     <div class="fb_tw_fp">
-     <!-- Links can only be shared is they have been boosted -->
+     <!-- Links can only be shared if they have been boosted -->
      <% if commentary.boosts.exists? %>
      <div class="boosted_fb_tw_fp" id="<%= 'share_links_' + commentary.id.to_s %>">
       <% if !lcs %>
@@ -18,12 +23,12 @@
         <% if lcs.history_id == commentary.id && lcs.milestone_type != 'facebook' && lcs.milestone_type != 'facebook / twitter' %>
           <%= link_to_function image_tag('/images/squareFaceBookIcon16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "facebook")' %>
         <% else %>
-          <%= image_tag('/images/squareFaceBookIcon16sepia.png') %>
+          <%= image_tag('/images/squareFaceBookIcon16grayscale.png') %>
         <% end %>
         <% if lcs.history_id == commentary.id && lcs.milestone_type != 'twitter' && lcs.milestone_type != 'facebook / twitter' %>
           <%= link_to_function image_tag('/images/twitter16.png'), 'share(' + (commentary.id.to_s) + ',"'+ (commentary.title) +'","' + (current_user.username) + '",' + (current_user.id.to_s) + ', "twitter")' %>
         <% else %>
-          <%=  image_tag('/images/twitter16sepia.png') %>
+          <%=  image_tag('/images/twitter16grayscale.png') %>
         <% end %>
       <% end %>
      </div>
@@ -35,7 +40,7 @@
 	    <% if !commentary.boosts.exists? %>
 	      <%= link_to 'Boost', create_boost_path(:commentaries_id => commentary), :class => 'shaded_button boost_button' %>
 	    <% else %>
-	      <%= link_to 'Boosted', destroy_boost_path(:commentaries_id => commentary), :confirm => 'Are you sure?', :class => 'shaded_button unboost_button' %>
+	      <%= link_to 'Boosted', destroy_boost_path(:commentaries_id => commentary), :class => 'shaded_button unboost_button' %>
 	    <% end %>
 	    </div>
 	  </div>
@@ -43,4 +48,5 @@
      
     </div>
 </div>
+<% end %>
 <% end %>

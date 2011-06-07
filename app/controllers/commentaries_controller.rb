@@ -167,11 +167,13 @@ class CommentariesController < ApplicationController
   # DELETE /commentaries/1.xml
   def destroy
     @commentary = Commentary.find(params[:id])
+    commentary_id = params[:id]
     @commentary.destroy
 
     respond_to do |format|
       format.html { redirect_to(commentaries_url) }
       format.xml  { head :ok }
+      format.js   { render "commentaries/boost.js.erb", :locals => {:u => commentary_id} } 
     end
   end
   

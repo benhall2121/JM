@@ -20,8 +20,12 @@ module ApplicationHelper
     end
   end  
   
+  def milestone_complete_daily_challenges_count
+  	  return History.find(:all, :conditions => ['user_id = (?) AND history_type = (?)', current_user.id, 'Share Commentary'], :group => "DATE(created_at)").count  
+  end
+  
   def share_commentary_today
-  	  if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
+    if History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
       return true
     else
       return false
@@ -43,6 +47,14 @@ module ApplicationHelper
   
   def shared_commentary_count_x_or_more(x)
     (shared_commentary_count >= x)? true : false
+  end
+  
+  def all_page_views_count
+    return History.find(:all, :conditions => ['history_type = (?)', 'Shared Commentary Link']).count 
+  end
+  
+  def all_page_views_count_divided_by_goal(goal)
+    return (all_page_views_count.to_f/goal.to_f)*100
   end
   
   def page_views_count
@@ -78,7 +90,7 @@ module ApplicationHelper
     ul_pv = History.find_by_sql(["select * from (select user_id, count(*) as level, 0 as pageViews from histories where history_type='Milestone' group by user_id UNION select user_id, 0 as level, count(*) as pageViews from histories where history_type='Shared Commentary Link' group by user_id) as s group by user_id order by level desc, pageViews desc;"])
     
     i = 1
-    rank = 0
+    rank = users
     ul_pv.each do |ulpv|
       if "#{ulpv['user_id']}" == current_user.id.to_s	    
       	      rank = i
@@ -148,6 +160,11 @@ module ApplicationHelper
     return ccc
   end
   
+  def next_challenge_available_date
+  	  ncad = History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC").created_at+1.day
+  	  return ncad.localtime
+  end	  
+  	  
   def logged_in?
     !!current_user
   end
@@ -157,7 +174,11 @@ module ApplicationHelper
   end
   
   def last_commentary_shared
-    return History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")	
+    if is_admin?
+      return nil
+    else
+      return History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
+    end
   end
 	
 end
