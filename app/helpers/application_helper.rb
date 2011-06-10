@@ -180,5 +180,10 @@ module ApplicationHelper
       return History.find(:first, :conditions => ['user_id = (?) AND history_type = (?) AND created_at > (?)', current_user.id, 'Share Commentary', (Date.today-1.day).to_s + ' 23:59:59'], :order => "created_at DESC")
     end
   end
+  
+  def is_bot?
+      am_i_robot = ["googlebot","twitterbot", "facebookexternalhit", "google.com/bot.html", "facebook.com/externalhit_uatext.php", "tweetmemebot", "sitebot", "msnbot", "robot", "bot", "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"]
+      return bot_checking_link = am_i_robot.include?(request.env["HTTP_USER_AGENT"])	  
+  end
 	
 end

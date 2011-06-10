@@ -74,14 +74,8 @@ class CommentariesController < ApplicationController
       @user_session = UserSession.new if @user_session.nil?
       
       #Is it a bot checking the link
-      puts "ben ben requester"
-      puts request.env["HTTP_USER_AGENT"]
-      puts "ben ben end"
-      AM_I_ROBOT = ["googlebot","twitterbot", "facebookexternalhit", "google.com/bot.html";, "facebook.com/externalhit_uatext.php";, "tweetmemebot", "sitebot", "msnbot", "robot", "bot", 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)']
-      puts "bot checking link"
-      bot_checking_link = AM_I_ROBOT.include?(request.env["HTTP_USER_AGENT"])
-      puts "end bot checking link"
-      
+      am_i_robot = ["googlebot","twitterbot", "facebookexternalhit", "google.com/bot.html", "facebook.com/externalhit_uatext.php", "tweetmemebot", "sitebot", "msnbot", "robot", "bot", "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)"]
+      bot_checking_link = am_i_robot.include?(request.env["HTTP_USER_AGENT"])
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
       if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && !bot_checking_link)

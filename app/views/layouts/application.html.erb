@@ -28,6 +28,7 @@
 
 <div class="all">
   <div class="header">
+   <% if !is_bot? %>
     <div class="logo">
       <% if logged_in? %>
         <%= link_to image_tag('/images/logoSmall.jpg'), root_path %>
@@ -35,6 +36,7 @@
           <%= link_to image_tag('/images/logo.jpg'), root_path %>
       <% end %>
     </div>
+    <% end %>
     <div id="firstNav">
       <% if logged_in? %>
         <div id="history_count" class="history_count"><%= link_to (user_level.to_s + ' / ' + page_views_count.to_s + ' / ' + rank_of_user.to_s ) , histories_path() %>
