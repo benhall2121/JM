@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index 
     if current_user
+    	    puts "hey"
       redirect_to :action => 'show', :id => current_user.id
     else
     @user_session = UserSession.new

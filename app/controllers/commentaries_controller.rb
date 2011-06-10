@@ -74,7 +74,14 @@ class CommentariesController < ApplicationController
       @user_session = UserSession.new if @user_session.nil?
       
       #Is it a bot checking the link
-      bot_checking_link = (Time.now < History.find_by_history_type_and_history_id_and_user_id('Share Commentary', commentary_id, user_shared).created_at + 10.seconds)
+      puts "ben ben requester"
+      puts request.env["HTTP_USER_AGENT"]
+      puts "ben ben end"
+      AM_I_ROBOT = ["googlebot","twitterbot", "facebookexternalhit", "google.com/bot.html";, "facebook.com/externalhit_uatext.php";, "tweetmemebot", "sitebot", "msnbot", "robot", "bot", 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)']
+      puts "bot checking link"
+      bot_checking_link = AM_I_ROBOT.include?(request.env["HTTP_USER_AGENT"])
+      puts "end bot checking link"
+      
       
       #Check to make sure the site isn't just being refreshed and is coming from another site
       if((request.env['REMOTE_HOST'] != request.domain && request.env['REMOTE_HOST'] != request.domain) && (!current_user || current_user.id != user_shared) && !bot_checking_link)
