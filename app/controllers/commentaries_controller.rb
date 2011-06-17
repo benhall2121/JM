@@ -107,14 +107,14 @@ class CommentariesController < ApplicationController
     end
   end
 
-  # GET /commentaries/1/edit
   def edit
     @commentary = Commentary.find(params[:id])
   end
 
-  # POST /commentaries
-  # POST /commentaries.xml
   def create
+    # White spaces were causing the facebook and twitter share links to not work	  
+    params[:commentary][:title].strip!
+    
     if !Commentary.find_by_links(params[:commentary][:links])
      @commentary = Commentary.new(params[:commentary])
      @commentary.user = current_user
@@ -138,8 +138,6 @@ class CommentariesController < ApplicationController
     end
   end
 
-  # PUT /commentaries/1
-  # PUT /commentaries/1.xml
   def update
     @commentary = Commentary.find(params[:id])
 

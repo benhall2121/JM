@@ -30,7 +30,7 @@ $(document).ready(function() {
 	  return false;		
 	});
 	
-	$("div.edit_fp_title").click(function() {
+	$("div.edit_fp_title").live("click", function() {
 			
 			//Create the HTML to insert into the div. Escape any " characters 
 			var ahref = $(this).siblings('span.title').children('a').attr('href');

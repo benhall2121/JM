@@ -49,7 +49,7 @@
       </div>
       <div class="about_header about_header_login">
         <%#=  render :partial => 'user_sessions/form' %>
-        <% form_for :user_session, :url => :usersessionscreate do |f| %>
+        <%= form_for :user_session, :url => :usersessionscreate do |f| %>
               <div class="field" style="padding:0 6px 0 0; margin:0px;">
                 <%= f.text_field :username, :class => 'text_field text_field_login', :placeholder => 'Username' %>
 	      </div>
