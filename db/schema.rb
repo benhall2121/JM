@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,15 +15,15 @@ ActiveRecord::Schema.define(:version => 20110607073311) do
 
   create_table "abouts", :force => true do |t|
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "boosts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "commentary_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "commentaries", :force => true do |t|
@@ -30,24 +31,24 @@ ActiveRecord::Schema.define(:version => 20110607073311) do
     t.string   "links"
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.string   "image_url"
   end
 
   create_table "faqs", :force => true do |t|
     t.string   "question"
     t.string   "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "histories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "history_id"
     t.string   "history_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.datetime "datetime"
     t.string   "ipaddress"
     t.string   "HttpReferrer"
@@ -58,15 +59,15 @@ ActiveRecord::Schema.define(:version => 20110607073311) do
     t.string   "name"
     t.string   "permalink"
     t.text     "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "site_guides", :force => true do |t|
     t.string   "question"
     t.string   "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -75,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20110607073311) do
     t.string   "crypted_password"
     t.string   "password_salt"
     t.string   "persistence_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "admin"
     t.string   "state_you_vote_in"
     t.string   "registration_code"

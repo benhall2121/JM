@@ -208,7 +208,7 @@ class CommentariesController < ApplicationController
     
     resp = Net::HTTP.get_response(URI.parse(url))
     resp_text = resp.body
-    
+
     title = resp_text.scan(/<title>\s*(.*.\s*.*)\s*<\/title>/i).to_s
     desc = resp_text.scan(/<meta name=\"description\" content=\"\s*(.*)\s*\"/i).to_s
     images = resp_text.scan(/<img [^>]*>/i)
@@ -216,10 +216,12 @@ class CommentariesController < ApplicationController
     root = parse_page_root(url)
     site_images = handle_images(root, images)
     
+    puts "site_images :: #{site_images}"
+
     title = url if title.blank?
     
     link_update = Hash.new
-    link_update = {:site_title => title, :site_desc => desc, :site_images => site_images, :site_link => url}
+    link_update = {:site_title => remove_extra_characters_from_string(title), :site_desc => desc, :site_images => site_images, :site_link => url}
     
     respond_to do |format|
       format.js { render(:partial => "shared/get_link_info", :locals => {:u => link_update})}
@@ -234,6 +236,8 @@ class CommentariesController < ApplicationController
     src = ""
     
       images.each { |i|
+        puts "i :: #{i}"
+
         slash=""
         # Make sure all single quotes are replaced with double quotes.
         # Since we aren't rendering javascript we don't really care
@@ -241,6 +245,9 @@ class CommentariesController < ApplicationController
         i.gsub!("'", "\"")   
         # Grab everything between src=" and ".
         src = i.scan(/src=[\"\']([^\"\']+)/).to_s
+
+        src = remove_extra_characters_from_string(src)
+
         #if the src has two // do not use the image. YouTube has // for a lot of little gifs
         if src[0,2] == "//" || src[0,2] == "__"
           next
@@ -256,7 +263,7 @@ class CommentariesController < ApplicationController
           end
           src = root + slash + src
         end
-       
+
         if completed_urls == ""
          completed_urls = src
  	else
@@ -271,16 +278,21 @@ class CommentariesController < ApplicationController
 		end	
  	end
         
-       # Use this if doing an image picker
-       # if completed_urls == ""
-       #   completed_urls = src
-       # else
-       #   completed_urls = completed_urls + "," + src
-       # end
+       #Use this if doing an image picker
+       if completed_urls == ""
+         completed_urls = src
+       else
+         completed_urls = completed_urls + "," + src
+       end
       }
 
         return completed_urls  
     end
+  end
+
+  def remove_extra_characters_from_string(theString)
+    puts "theString :: #{theString}"
+    theString.gsub!(/\[/i, "").gsub!(/\]/i, "").gsub!(/\"/i, "")  
   end
   
   def parse_page_root(url)

@@ -7,6 +7,6 @@ $(".preview #site_desc").html("<%= escape_javascript(u[:site_desc]) %>");
 var q = "<%= escape_javascript(u[:site_images]) %>"
 images = q.split(',');
 
-$(".preview #site_image").html(images[0]);
+$(".preview #site_image").html("<img src="+images[0]+" />");
 $(".preview").show('fast');
 
